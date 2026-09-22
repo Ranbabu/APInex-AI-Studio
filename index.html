@@ -94,7 +94,7 @@ footer span{font-size:11px;color:var(--muted)}
 <main>
 <section class="hero">
   <h1>आपका AI न्यूज़ स्टूडियो</h1>
-  <p>APInex API से हिंदी न्यूज़ स्क्रिप्ट और 16:9 thumbnail बनाइए। एक ही API key से अलग-अलग मॉडल बदलकर इस्तेमाल करें।</p>
+  <p>APInex API (Cloudflare Proxy के माध्यम से) हिंदी न्यूज़ स्क्रिप्ट और 16:9 thumbnail बनाइए। एक ही API key से अलग-अलग मॉडल बदलकर इस्तेमाल करें।</p>
   <div class="pills"><span class="pill">Gemini 2.5</span><span class="pill">GPT</span><span class="pill">DeepSeek</span></div>
 </section>
 
@@ -202,12 +202,14 @@ footer span{font-size:11px;color:var(--muted)}
 <footer>
   <div class="footer-inner">
     <span>Aryan News Tech</span>
-    <span>API: api.apinex.bond/v1</span>
+    <span>Proxy: apinex-ai-studio.babu902654.workers.dev</span>
   </div>
 </footer>
 
 <script>
-const BASE = "https://api.apinex.bond/v1";
+// यहाँ आपका नया Cloudflare Worker URL सेट किया गया है
+const BASE = "https://apinex-ai-studio.babu902654.workers.dev/v1";
+
 const $ = id => document.getElementById(id);
 
 window.addEventListener("DOMContentLoaded",()=>{
@@ -268,10 +270,7 @@ async function apiFetch(path,body){
     }
     return data;
   } catch (error) {
-    if (error.message.includes("Failed to fetch")) {
-      throw new Error("Failed to fetch. यह CORS पॉलिसी एरर हो सकता है। सुनिश्चित करें कि APInex API मोबाइल ब्राउज़र या GitHub Pages से डायरेक्ट कॉल की अनुमति देता है।");
-    }
-    throw error;
+    throw new Error("Network Error: " + error.message);
   }
 }
 
