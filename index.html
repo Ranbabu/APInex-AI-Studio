@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#f7f9fc">
-<title>APInex AI Studio — Script & Image Generator</title>
+<title>Aryan News Tech — AI Studio</title>
 <style>
 :root{
   --bg:#f6f8fc;--card:#fff;--text:#18202b;--muted:#687386;--line:#dce3ec;
@@ -13,7 +13,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:linear-gradient(180deg,#f9fbff,#f2f6fb);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans Devanagari,sans-serif}
+body{margin:0;background:linear-gradient(180deg,#f9fbff,#f2f6fb);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 .app{max-width:1050px;margin:auto;padding-bottom:100px}
@@ -62,8 +62,6 @@ textarea{min-height:130px;resize:vertical;line-height:1.55}
 .tab{padding:12px;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-weight:900}
 .tab.active{border-color:var(--accent);background:#effcf4;color:#087f4b}
 .mode{display:none}.mode.active{display:block}
-.range{display:flex;align-items:center;gap:10px}.range input{padding:0}
-.range output{min-width:45px;text-align:center;font-weight:900}
 .result-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
 .result{white-space:pre-wrap;background:#10151b;color:#eaf1f7;border-radius:16px;padding:15px;min-height:180px;line-height:1.7;font-size:14px;overflow:auto}
 .loading{display:inline-flex;align-items:center;gap:8px}
@@ -87,8 +85,8 @@ footer span{font-size:11px;color:var(--muted)}
 <div class="app">
 <header>
   <div class="header-inner">
-    <div class="logo">AX</div>
-    <div class="head-title"><b>APInex AI Studio</b><span>Script + Image Generator</span></div>
+    <div class="logo">ANT</div>
+    <div class="head-title"><b>Aryan News Tech</b><span>Script + Image Studio</span></div>
     <div id="apiStatus" class="status">API key नहीं</div>
   </div>
 </header>
@@ -96,8 +94,8 @@ footer span{font-size:11px;color:var(--muted)}
 <main>
 <section class="hero">
   <h1>आपका AI न्यूज़ स्टूडियो</h1>
-  <p>APInex के OpenAI-compatible API से हिंदी न्यूज़ स्क्रिप्ट और 16:9 thumbnail/image बनाइए। एक ही API key से अलग-अलग मॉडल बदलकर इस्तेमाल करें।</p>
-  <div class="pills"><span class="pill">GPT</span><span class="pill">Gemini</span><span class="pill">Grok</span><span class="pill">Claude</span><span class="pill">DeepSeek</span><span class="pill">Image API</span></div>
+  <p>APInex API से हिंदी न्यूज़ स्क्रिप्ट और 16:9 thumbnail बनाइए। एक ही API key से अलग-अलग मॉडल बदलकर इस्तेमाल करें।</p>
+  <div class="pills"><span class="pill">Gemini 2.5</span><span class="pill">GPT</span><span class="pill">DeepSeek</span></div>
 </section>
 
 <section class="card">
@@ -109,10 +107,6 @@ footer span{font-size:11px;color:var(--muted)}
   <div class="actions">
     <button class="btn primary" onclick="saveKey()">सेव करें</button>
     <button class="btn" onclick="clearKey()">हटाएँ</button>
-    <button class="btn" onclick="loadModels()">मॉडल जाँचें</button>
-  </div>
-  <div class="notice" style="margin-top:12px">
-    सुरक्षा: API key इस ब्राउज़र के localStorage में सेव हो सकती है। इसे सार्वजनिक वेबसाइट पर hard-code न करें। GitHub/Blogger पर यह फाइल publish करते समय API key HTML में न डालें।
   </div>
 </section>
 
@@ -127,28 +121,16 @@ footer span{font-size:11px;color:var(--muted)}
       <div class="field">
         <label>AI मॉडल</label>
         <select id="scriptModel">
-          <optgroup label="OpenAI">
-            <option value="gpt/5.6-sol">GPT 5.6 Sol</option>
-            <option value="gpt/5.6-luna">GPT 5.6 Luna</option>
-          </optgroup>
           <optgroup label="Gemini">
-            <option value="gemini/3.8-flash">Gemini 3.8 Flash</option>
-            <option value="gemini/3.1-pro">Gemini 3.1 Pro</option>
+            <option value="gemini/2.5-flash" selected>Gemini 2.5 Flash</option>
           </optgroup>
-          <optgroup label="Grok">
-            <option value="grok/4.6">Grok 4.6</option>
+          <optgroup label="APInex Free">
+            <option value="free/mimo-v2.6-flash">Mimo V2.6 Flash (Free)</option>
+            <option value="free/mimo-v2.6-pro">Mimo V2.6 Pro (Free)</option>
           </optgroup>
-          <optgroup label="Claude">
-            <option value="claude/sonnet-4.6">Claude 4.6 Sonnet</option>
-            <option value="claude/opus-5">Claude Opus 5</option>
-          </optgroup>
-          <optgroup label="DeepSeek">
+          <optgroup label="OpenAI & Others">
+            <option value="gpt/5.6-sol">GPT 5.6 Sol</option>
             <option value="deepseek/v4-flash">DeepSeek V4 Flash</option>
-            <option value="deepseek/v4-pro">DeepSeek V4 Pro</option>
-          </optgroup>
-          <optgroup label="अन्य">
-            <option value="kimi/k3">Kimi K3</option>
-            <option value="glm/5.2">GLM 5.2</option>
           </optgroup>
         </select>
       </div>
@@ -156,51 +138,20 @@ footer span{font-size:11px;color:var(--muted)}
         <label>स्क्रिप्ट प्रकार</label>
         <select id="scriptType">
           <option>ब्रेकिंग न्यूज़</option>
-          <option>टॉप 5 बड़ी खबरें</option>
           <option>टॉप 10 बड़ी खबरें</option>
           <option>विस्तृत न्यूज़ रिपोर्ट</option>
-          <option>YouTube न्यूज़ वीडियो</option>
-          <option>तथ्य-जाँच रिपोर्ट</option>
-          <option>कस्टम</option>
         </select>
       </div>
     </div>
 
     <div class="field" style="margin-top:12px">
       <label>विषय / खबर / इनपुट</label>
-      <textarea id="topic" placeholder="उदाहरण: आज की 5 बड़ी खबरें — हर खबर को सरल, स्वाभाविक हिंदी में समझाइए।"></textarea>
-    </div>
-
-    <div class="grid" style="margin-top:12px">
-      <div class="field">
-        <label>लंबाई</label>
-        <select id="length">
-          <option value="short">छोटी — लगभग 500 शब्द</option>
-          <option value="medium" selected>मध्यम — लगभग 1000 शब्द</option>
-          <option value="long">लंबी — लगभग 1800 शब्द</option>
-          <option value="verylong">बहुत लंबी — लगभग 3000 शब्द</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>टोन</label>
-        <select id="tone">
-          <option>मानवीय और स्वाभाविक न्यूज़ एंकर</option>
-          <option>तेज़ ब्रेकिंग न्यूज़</option>
-          <option>गंभीर और तथ्यात्मक</option>
-          <option>सरल आम बोलचाल की हिंदी</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="field" style="margin-top:12px">
-      <label>अतिरिक्त निर्देश</label>
-      <textarea id="extra" style="min-height:90px" placeholder="उदाहरण: अंग्रेज़ी शब्द कम रखें, कोई तथ्य न गढ़ें, अंत में दर्शकों से चैनल सब्सक्राइब करने की अपील दें।"></textarea>
+      <textarea id="topic" placeholder="उदाहरण: आज की टॉप 10 खबरें तैयार करें।"></textarea>
     </div>
 
     <div class="actions">
       <button id="scriptBtn" class="btn primary" onclick="generateScript()">⚡ स्क्रिप्ट बनाएं</button>
       <button class="btn" onclick="copyText('scriptResult')">कॉपी</button>
-      <button class="btn" onclick="downloadText()">TXT डाउनलोड</button>
     </div>
   </div>
 
@@ -213,55 +164,30 @@ footer span{font-size:11px;color:var(--muted)}
         </select>
       </div>
       <div class="field">
-        <label>Size</label>
-        <select id="imageSize">
-          <option value="1024x1024">1024 × 1024</option>
-          <option value="1536x1024">1536 × 1024</option>
-          <option value="1024x1536">1024 × 1536</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="grid" style="margin-top:12px">
-      <div class="field">
         <label>Aspect Ratio</label>
         <select id="aspect">
           <option value="16:9" selected>16:9 — YouTube Thumbnail</option>
           <option value="1:1">1:1 — Square</option>
-          <option value="9:16">9:16 — Shorts</option>
-          <option value="4:5">4:5 — Social</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Output</label>
-        <select id="imageOutput">
-          <option value="b64_json" selected>Base64 JSON</option>
-          <option value="url">URL (यदि API उपलब्ध कराए)</option>
         </select>
       </div>
     </div>
 
     <div class="field" style="margin-top:12px">
       <label>Image Prompt</label>
-      <textarea id="imagePrompt" placeholder="उदाहरण: भारतीय ब्रेकिंग न्यूज़ YouTube thumbnail, cinematic photorealistic editorial style, dramatic lighting, sharp focus, 16:9, mobile-friendly composition..."></textarea>
+      <textarea id="imagePrompt" placeholder="उदाहरण: भारतीय ब्रेकिंग न्यूज़ YouTube thumbnail..."></textarea>
     </div>
 
     <div class="actions">
       <button id="imageBtn" class="btn primary" onclick="generateImage()">🎨 इमेज बनाएं</button>
-      <button class="btn" onclick="copyText('imagePrompt')">प्रॉम्प्ट कॉपी</button>
     </div>
     <div id="imageError" class="notice hidden" style="margin-top:12px"></div>
-    <img id="imagePreview" alt="Generated image">
-    <div class="actions">
-      <a id="downloadImage" class="btn blue hidden" download="apinex-image.png">⬇️ इमेज डाउनलोड</a>
-    </div>
+    <img id="imagePreview" alt="Generated image" style="margin-top:12px;">
   </div>
 </section>
 
 <section class="card">
   <div class="result-head">
     <h2 style="margin:0">आउटपुट</h2>
-    <button class="btn" onclick="copyText('scriptResult')">कॉपी</button>
   </div>
   <div id="scriptResult" class="result">यहाँ स्क्रिप्ट का परिणाम दिखाई देगा…</div>
   <div class="stats">
@@ -270,18 +196,12 @@ footer span{font-size:11px;color:var(--muted)}
     <div class="stat"><b id="timeStat">—</b><span>समय</span></div>
   </div>
 </section>
-
-<section class="card">
-  <h2>API मॉडल सूची</h2>
-  <p class="small">यह बटन APInex के <code>/v1/models</code> endpoint से उपलब्ध मॉडल पढ़ने की कोशिश करता है। यदि browser CORS अनुमति न दे, ऊपर दिए गए manual मॉडल इस्तेमाल करें।</p>
-  <div id="modelsResult" class="result" style="min-height:100px">मॉडल सूची यहाँ आएगी…</div>
-</section>
 </main>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <span>APInex AI Studio • Single HTML</span>
+    <span>Aryan News Tech</span>
     <span>API: api.apinex.bond/v1</span>
   </div>
 </footer>
@@ -311,7 +231,7 @@ function saveKey(){
   if(!k)return alert("पहले API key डालें।");
   localStorage.setItem("apinex_key",k);
   updateStatus();
-  alert("API key इस डिवाइस के browser में सेव हो गई।");
+  alert("API key सेव हो गई।");
 }
 function clearKey(){
   localStorage.removeItem("apinex_key");$("apiKey").value="";updateStatus();
@@ -331,25 +251,28 @@ function setBusy(btn,busy,label){
   btn.disabled=busy;
   btn.innerHTML=busy?'<span class="loading"><span class="spinner"></span> काम हो रहा है…</span>':label;
 }
-function safeText(v){
-  if(v==null)return "";
-  if(typeof v==="string")return v;
-  try{return JSON.stringify(v,null,2)}catch{return String(v)}
-}
+
 async function apiFetch(path,body){
   const key=getKey();
-  const r=await fetch(BASE+path,{
-    method:"POST",
-    headers:{"Authorization":"Bearer "+key,"Content-Type":"application/json"},
-    body:JSON.stringify(body)
-  });
-  const text=await r.text();
-  let data;try{data=JSON.parse(text)}catch{data={raw:text}}
-  if(!r.ok){
-    const msg=data?.error?.message||data?.message||data?.raw||("HTTP "+r.status);
-    throw new Error(msg);
+  try {
+    const r=await fetch(BASE+path,{
+      method:"POST",
+      headers:{"Authorization":"Bearer "+key,"Content-Type":"application/json"},
+      body:JSON.stringify(body)
+    });
+    const text=await r.text();
+    let data;try{data=JSON.parse(text)}catch{data={raw:text}}
+    if(!r.ok){
+      const msg=data?.error?.message||data?.message||data?.raw||("HTTP "+r.status);
+      throw new Error(msg);
+    }
+    return data;
+  } catch (error) {
+    if (error.message.includes("Failed to fetch")) {
+      throw new Error("Failed to fetch. यह CORS पॉलिसी एरर हो सकता है। सुनिश्चित करें कि APInex API मोबाइल ब्राउज़र या GitHub Pages से डायरेक्ट कॉल की अनुमति देता है।");
+    }
+    throw error;
   }
-  return data;
 }
 
 async function generateScript(){
@@ -360,37 +283,21 @@ async function generateScript(){
   $("scriptResult").textContent="स्क्रिप्ट तैयार की जा रही है…";
   try{
     const model=$("scriptModel").value;
-    const length=$("length").value;
-    const tone=$("tone").value;
     const type=$("scriptType").value;
-    const extra=$("extra").value.trim();
-    const lengthText={
-      short:"लगभग 500 शब्द",medium:"लगभग 1000 शब्द",
-      long:"लगभग 1800 शब्द",verylong:"लगभग 3000 शब्द"
-    }[length];
-
-    const system=`आप एक अनुभवी हिंदी न्यूज़ वीडियो स्क्रिप्ट लेखक हैं।
-केवल उपलब्ध इनपुट पर आधारित सामग्री लिखें। कोई नया तथ्य, आंकड़ा, नाम, तारीख या उद्धरण गढ़ें नहीं।
-भाषा स्वाभाविक, साफ और बोलने योग्य हिंदी रखें। जरूरत के बिना अंग्रेज़ी शब्द न डालें।
-स्क्रिप्ट प्रकार: ${type}
-लक्षित लंबाई: ${lengthText}
-टोन: ${tone}
-YouTube के लिए शुरुआत में आकर्षक लेकिन तथ्यात्मक परिचय दें, फिर मुख्य खबरों को क्रमबद्ध रखें और अंत में संक्षिप्त समापन दें।
-${extra?("अतिरिक्त निर्देश: "+extra):""}`;
+    const system=`आप एक अनुभवी हिंदी न्यूज़ वीडियो स्क्रिप्ट लेखक हैं। स्क्रिप्ट प्रकार: ${type}। स्वाभाविक हिंदी का प्रयोग करें।`;
 
     const data=await apiFetch("/chat/completions",{
       model,
       messages:[
         {role:"system",content:system},
         {role:"user",content:topic}
-      ],
-      temperature:.55,
-      max_tokens:length==="short"?1800:length==="medium"?3500:length==="long"?6000:9000
+      ]
     });
 
-    const content=data?.choices?.[0]?.message?.content ?? data?.choices?.[0]?.text ?? data?.output_text;
-    if(!content) throw new Error("API से टेक्स्ट आउटपुट नहीं मिला।");
-    $("scriptResult").textContent=typeof content==="string"?content:safeText(content);
+    const content=data?.choices?.[0]?.message?.content ?? data?.choices?.[0]?.text;
+    if(!content) throw new Error("API से आउटपुट नहीं मिला।");
+    
+    $("scriptResult").textContent=content;
     $("modelStat").textContent=model;
     const u=data?.usage||{};
     $("tokenStat").textContent=((u.total_tokens ?? ((u.prompt_tokens || 0) + (u.completion_tokens || 0))) || "—");
@@ -398,21 +305,7 @@ ${extra?("अतिरिक्त निर्देश: "+extra):""}`;
   }catch(e){
     $("scriptResult").textContent="त्रुटि: "+e.message;
     $("modelStat").textContent="Error";
-    $("tokenStat").textContent="—";
-    $("timeStat").textContent="—";
   }finally{setBusy(btn,false,"⚡ स्क्रिप्ट बनाएं")}
-}
-
-function extractImage(data){
-  const item=data?.data?.[0]||data?.images?.[0]||data?.result?.data?.[0]||data?.result?.[0];
-  if(!item)return null;
-  if(item.b64_json)return {src:"data:image/png;base64,"+item.b64_json,ext:"png"};
-  if(item.url)return {src:item.url,ext:"png"};
-  if(typeof item==="string"){
-    if(item.startsWith("data:image"))return {src:item,ext:"png"};
-    if(/^https?:\/\//.test(item))return {src:item,ext:"png"};
-  }
-  return null;
 }
 
 async function generateImage(){
@@ -421,67 +314,32 @@ async function generateImage(){
   setBusy(btn,true,"🎨 इमेज बनाएं");
   $("imageError").classList.add("hidden");
   $("imagePreview").style.display="none";
-  $("downloadImage").classList.add("hidden");
   try{
     const body={
       model:$("imageModel").value,
       prompt,
-      size:$("imageSize").value,
       aspect_ratio:$("aspect").value,
-      response_format:$("imageOutput").value
+      response_format:"url"
     };
     const data=await apiFetch("/images/generations",body);
-    const img=extractImage(data);
-    if(!img){
-      throw new Error("इमेज डेटा नहीं मिला। API response: "+safeText(data).slice(0,1000));
-    }
-    $("imagePreview").src=img.src;
+    
+    let imgUrl = data?.data?.[0]?.url || data?.images?.[0]?.url;
+    if(!imgUrl) throw new Error("इमेज URL प्राप्त नहीं हुआ।");
+    
+    $("imagePreview").src=imgUrl;
     $("imagePreview").style.display="block";
-    $("downloadImage").href=img.src;
-    $("downloadImage").classList.remove("hidden");
     $("scriptResult").textContent="इमेज सफलतापूर्वक तैयार हुई।";
     $("modelStat").textContent=body.model;
-    $("tokenStat").textContent=data?.usage?.total_tokens??"—";
-    $("timeStat").textContent="—";
   }catch(e){
-    $("imageError").textContent="इमेज बनाने में समस्या: "+e.message;
+    $("imageError").textContent="इमेज त्रुटि: "+e.message;
     $("imageError").classList.remove("hidden");
-    $("scriptResult").textContent="इमेज API त्रुटि: "+e.message;
   }finally{setBusy(btn,false,"🎨 इमेज बनाएं")}
 }
 
-async function loadModels(){
-  const box=$("modelsResult");
-  try{
-    const key=getKey();
-    box.textContent="मॉडल सूची पढ़ी जा रही है…";
-    const r=await fetch(BASE+"/models",{headers:{"Authorization":"Bearer "+key}});
-    const text=await r.text();let data;try{data=JSON.parse(text)}catch{data={raw:text}}
-    if(!r.ok)throw new Error(data?.error?.message||data?.message||("HTTP "+r.status));
-    const list=data?.data||data?.models||[];
-    if(Array.isArray(list)&&list.length){
-      box.textContent=list.map((m,i)=>`${i+1}. ${m.id||m.name||safeText(m)}`).join("\\n");
-    }else box.textContent=safeText(data);
-  }catch(e){
-    box.textContent="मॉडल सूची नहीं मिल सकी: "+e.message+
-      "\\n\\nManual model selector ऊपर उपलब्ध है।";
-  }
-}
 function copyText(id){
   const el=$(id), text=el.value!==undefined?el.value:el.textContent;
-  navigator.clipboard?.writeText(text).then(()=>alert("कॉपी हो गया।")).catch(()=>alert("कॉपी नहीं हुआ; टेक्स्ट को दबाकर कॉपी करें।"));
+  navigator.clipboard?.writeText(text).then(()=>alert("कॉपी हो गया।")).catch(()=>alert("कॉपी नहीं हुआ; मैनुअल कॉपी करें।"));
 }
-function downloadText(){
-  const text=$("scriptResult").textContent;
-  const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download="apinex-news-script.txt";a.click();URL.revokeObjectURL(a.href);
-}
-
-window.addEventListener("error", function(e){
-  console.error("APInex Studio error:", e.error || e.message);
-});
-
 </script>
 </body>
 </html>
