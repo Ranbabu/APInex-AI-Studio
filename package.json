@@ -1,0 +1,10 @@
+{
+  "name": "apinex-proxy",
+  "version": "1.0.0",
+  "description": "CORS Proxy for APInex",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {}
+}
