@@ -12,15 +12,11 @@
   --shadow:0 10px 30px rgba(28,42,61,.08);--radius:20px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{margin:0;background:linear-gradient(180deg,#f9fbff,#f2f6fb);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 .app{max-width:1050px;margin:auto;padding-bottom:100px}
-header{
-  position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);
-  backdrop-filter:blur(16px);border-bottom:1px solid var(--line);
-}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .header-inner{padding:14px 16px;display:flex;align-items:center;gap:12px}
 .logo{width:44px;height:44px;border-radius:14px;background:#111;color:#fff;display:grid;place-items:center;font-weight:900}
 .head-title{flex:1}.head-title b{display:block;font-size:18px}.head-title span{font-size:12px;color:var(--muted)}
@@ -36,49 +32,34 @@ main{padding:18px 14px}
 .pill{border:1px solid rgba(255,255,255,.22);padding:7px 10px;border-radius:999px;font-size:12px;color:#eef4fa}
 
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin-bottom:16px;box-shadow:var(--shadow)}
-.card h2{font-size:18px;margin:0 0 13px}.card h3{font-size:15px;margin:16px 0 9px}
+.card h2{font-size:18px;margin:0 0 13px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field label{display:block;font-size:12px;font-weight:800;color:#566276;margin:0 0 6px}
-input,textarea,select{
-  width:100%;border:1px solid #d7dfe9;background:#fbfcfe;border-radius:13px;
-  padding:12px 13px;color:var(--text);outline:none;transition:.2s
-}
+input,textarea,select{width:100%;border:1px solid #d7dfe9;background:#fbfcfe;border-radius:13px;padding:12px 13px;color:var(--text);outline:none;transition:.2s}
 input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(52,120,246,.1)}
 textarea{min-height:130px;resize:vertical;line-height:1.55}
 .key-row{display:flex;gap:8px}.key-row input{flex:1}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.btn{
-  border:1.5px solid #cbd5e1;background:#fff;color:#263243;border-radius:13px;
-  padding:11px 15px;font-weight:800;transition:transform .12s,box-shadow .2s,background .2s
-}
-.btn:active{transform:scale(.96)}
+.btn{border:1.5px solid #cbd5e1;background:#fff;color:#263243;border-radius:13px;padding:11px 15px;font-weight:800;transition:.15s}
 .btn:hover{box-shadow:0 6px 16px rgba(35,52,75,.12)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#062d19}
 .btn.blue{background:#eaf2ff;border-color:#9fc1ff;color:#1554b8}
-.btn.danger{background:#fff3f3;border-color:#f0b4b7;color:#bd2e34}
 .btn:disabled{opacity:.55;cursor:not-allowed}
-.small{font-size:11px;color:var(--muted);line-height:1.5}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
 .tab{padding:12px;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-weight:900}
 .tab.active{border-color:var(--accent);background:#effcf4;color:#087f4b}
 .mode{display:none}.mode.active{display:block}
-.result-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
 .result{white-space:pre-wrap;background:#10151b;color:#eaf1f7;border-radius:16px;padding:15px;min-height:180px;line-height:1.7;font-size:14px;overflow:auto}
-.loading{display:inline-flex;align-items:center;gap:8px}
-.spinner{width:15px;height:15px;border:2px solid #b7c2ce;border-top-color:#087f4b;border-radius:50%;animation:spin .8s linear infinite}
+.spinner{width:14px;height:14px;border:2px solid #b7c2ce;border-top-color:#087f4b;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
-#imagePreview{width:100%;max-height:600px;object-fit:contain;border-radius:16px;border:1px solid var(--line);background:#f1f4f8;display:none}
+#imagePreview{width:100%;max-height:500px;object-fit:contain;border-radius:16px;border:1px solid var(--line);background:#f1f4f8;display:none;margin-top:12px;}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
 .stat{border:1px solid var(--line);border-radius:13px;padding:10px;background:#fafbfd}.stat b{display:block;font-size:16px}.stat span{font-size:10px;color:var(--muted)}
-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:30}
-.footer-inner{max-width:1050px;margin:auto;padding:10px 14px;display:flex;justify-content:space-between;gap:8px;align-items:center}
-footer span{font-size:11px;color:var(--muted)}
-.notice{padding:11px 13px;border-radius:13px;background:#fff9e9;border:1px solid #f1d88b;color:#775d16;font-size:12px;line-height:1.5}
+footer{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);border-top:1px solid var(--line);z-index:30}
+.footer-inner{max-width:1050px;margin:auto;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.notice{padding:11px 13px;border-radius:13px;background:#fff5f5;border:1px solid #f0b4b7;color:#bd2e34;font-size:13px}
 .hidden{display:none!important}
-@media(max-width:680px){
- .grid{grid-template-columns:1fr}.hero h1{font-size:23px}.card{padding:14px}.stats{grid-template-columns:1fr 1fr}
- .header-inner{padding:10px 12px}.status{display:none}
-}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -94,19 +75,30 @@ footer span{font-size:11px;color:var(--muted)}
 <main>
 <section class="hero">
   <h1>आपका AI न्यूज़ स्टूडियो</h1>
-  <p>APInex API (Cloudflare Proxy के माध्यम से) हिंदी न्यूज़ स्क्रिप्ट और 16:9 thumbnail बनाइए। एक ही API key से अलग-अलग मॉडल बदलकर इस्तेमाल करें।</p>
-  <div class="pills"><span class="pill">Gemini 2.5</span><span class="pill">GPT</span><span class="pill">DeepSeek</span></div>
+  <p>APInex Free मॉडल्स के साथ अपनी हिंदी न्यूज़ स्क्रिप्ट्स और थंबनेल्स तैयार करें।</p>
+  <div class="pills">
+    <span class="pill">Gemini 3.8 Flash</span>
+    <span class="pill">GPT-5.6 Luna</span>
+    <span class="pill">GLM 5.3</span>
+    <span class="pill">Nano Banana 2</span>
+  </div>
 </section>
 
 <section class="card">
-  <h2>1. APInex API Key</h2>
-  <div class="key-row">
-    <input id="apiKey" type="password" placeholder="sk-apx-..." autocomplete="off">
-    <button class="btn blue" onclick="toggleKey()">देखें</button>
+  <h2>1. Cloudflare Proxy & API Key</h2>
+  <div class="field" style="margin-bottom: 10px;">
+    <label>Cloudflare Worker Proxy URL</label>
+    <input id="workerUrl" type="text" value="https://apinex-ai-studio.babu902654.workers.dev" placeholder="https://your-worker.workers.dev">
+  </div>
+  <div class="field">
+    <label>APInex API Key (sk-apxc...)</label>
+    <div class="key-row">
+      <input id="apiKey" type="password" placeholder="sk-apxc23e18..." autocomplete="off">
+      <button class="btn blue" onclick="toggleKey()">देखें</button>
+    </div>
   </div>
   <div class="actions">
-    <button class="btn primary" onclick="saveKey()">सेव करें</button>
-    <button class="btn" onclick="clearKey()">हटाएँ</button>
+    <button class="btn primary" onclick="saveSettings()">सेव करें</button>
   </div>
 </section>
 
@@ -119,39 +111,37 @@ footer span{font-size:11px;color:var(--muted)}
   <div id="scriptMode" class="mode active">
     <div class="grid">
       <div class="field">
-        <label>AI मॉडल</label>
+        <label>AI मॉडल (100% Free Daily Limit)</label>
         <select id="scriptModel">
-          <optgroup label="Gemini">
-            <option value="gemini/2.5-flash" selected>Gemini 2.5 Flash</option>
-          </optgroup>
-          <optgroup label="APInex Free">
-            <option value="free/mimo-v2.6-flash">Mimo V2.6 Flash (Free)</option>
-            <option value="free/mimo-v2.6-pro">Mimo V2.6 Pro (Free)</option>
-          </optgroup>
-          <optgroup label="OpenAI & Others">
-            <option value="gpt/5.6-sol">GPT 5.6 Sol</option>
-            <option value="deepseek/v4-flash">DeepSeek V4 Flash</option>
+          <optgroup label="Free Models (दैनिक कोटा)">
+            <option value="free/gemini-3.8-flash" selected>free/gemini-3.8-flash (Recommended)</option>
+            <option value="free/gemini-3.1-pro">free/gemini-3.1-pro</option>
+            <option value="free/gpt-5.6-luna">free/gpt-5.6-luna</option>
+            <option value="free/glm-5.3-flash">free/glm-5.3-flash</option>
+            <option value="free/mimo-v2.6-flash">free/mimo-v2.6-flash</option>
+            <option value="free/nano-banana-2">free/nano-banana-2</option>
           </optgroup>
         </select>
       </div>
       <div class="field">
         <label>स्क्रिप्ट प्रकार</label>
         <select id="scriptType">
-          <option>ब्रेकिंग न्यूज़</option>
-          <option>टॉप 10 बड़ी खबरें</option>
-          <option>विस्तृत न्यूज़ रिपोर्ट</option>
+          <option>ब्रेकिंग न्यूज़ (Viral Breaking News)</option>
+          <option>टॉप 10 बड़ी खबरें (Top 10 Headlines)</option>
+          <option>विस्तृत न्यूज़ रिपोर्ट (Deep Analysis)</option>
+          <option>YouTube Shorts / Reels स्क्रिप्ट</option>
         </select>
       </div>
     </div>
 
     <div class="field" style="margin-top:12px">
-      <label>विषय / खबर / इनपुट</label>
-      <textarea id="topic" placeholder="उदाहरण: आज की टॉप 10 खबरें तैयार करें।"></textarea>
+      <label>विषय / हेडलाइंस / इनपुट</label>
+      <textarea id="topic" placeholder="उदाहरण: आज की बड़ी राष्ट्रीय और तकनीकी खबरें लिखें..."></textarea>
     </div>
 
     <div class="actions">
       <button id="scriptBtn" class="btn primary" onclick="generateScript()">⚡ स्क्रिप्ट बनाएं</button>
-      <button class="btn" onclick="copyText('scriptResult')">कॉपी</button>
+      <button class="btn" onclick="copyText('scriptResult')">कॉपी करें</button>
     </div>
   </div>
 
@@ -160,39 +150,39 @@ footer span{font-size:11px;color:var(--muted)}
       <div class="field">
         <label>Image Model</label>
         <select id="imageModel">
-          <option value="grok-imagine-2">Grok Imagine 2</option>
+          <option value="free/nano-banana-2">free/nano-banana-2</option>
+          <option value="grok-imagine-2">grok-imagine-2</option>
         </select>
       </div>
       <div class="field">
         <label>Aspect Ratio</label>
         <select id="aspect">
-          <option value="16:9" selected>16:9 — YouTube Thumbnail</option>
-          <option value="1:1">1:1 — Square</option>
+          <option value="16:9" selected>16:9 (YouTube Thumbnail)</option>
+          <option value="1:1">1:1 (Square)</option>
+          <option value="9:16">9:16 (Shorts / Reels)</option>
         </select>
       </div>
     </div>
 
     <div class="field" style="margin-top:12px">
       <label>Image Prompt</label>
-      <textarea id="imagePrompt" placeholder="उदाहरण: भारतीय ब्रेकिंग न्यूज़ YouTube thumbnail..."></textarea>
+      <textarea id="imagePrompt" placeholder="उदाहरण: Indian Breaking News Studio Background, Realistic 4K..."></textarea>
     </div>
 
     <div class="actions">
       <button id="imageBtn" class="btn primary" onclick="generateImage()">🎨 इमेज बनाएं</button>
     </div>
     <div id="imageError" class="notice hidden" style="margin-top:12px"></div>
-    <img id="imagePreview" alt="Generated image" style="margin-top:12px;">
+    <img id="imagePreview" alt="Generated Output">
   </div>
 </section>
 
 <section class="card">
-  <div class="result-head">
-    <h2 style="margin:0">आउटपुट</h2>
-  </div>
-  <div id="scriptResult" class="result">यहाँ स्क्रिप्ट का परिणाम दिखाई देगा…</div>
+  <h2>आउटपुट</h2>
+  <div id="scriptResult" class="result">यहाँ परिणाम दिखाई देगा…</div>
   <div class="stats">
     <div class="stat"><b id="modelStat">—</b><span>मॉडल</span></div>
-    <div class="stat"><b id="tokenStat">—</b><span>टोकन उपयोग</span></div>
+    <div class="stat"><b id="tokenStat">—</b><span>टोकन</span></div>
     <div class="stat"><b id="timeStat">—</b><span>समय</span></div>
   </div>
 </section>
@@ -201,143 +191,164 @@ footer span{font-size:11px;color:var(--muted)}
 
 <footer>
   <div class="footer-inner">
-    <span>Aryan News Tech</span>
-    <span>Proxy: apinex-ai-studio.babu902654.workers.dev</span>
+    <span>Aryan News Tech Studio</span>
+    <span id="footerUrl">Proxy Ready</span>
   </div>
 </footer>
 
 <script>
-// यहाँ आपका नया Cloudflare Worker URL सेट किया गया है
-const BASE = "https://apinex-ai-studio.babu902654.workers.dev/v1";
-
 const $ = id => document.getElementById(id);
 
-window.addEventListener("DOMContentLoaded",()=>{
-  const k=localStorage.getItem("apinex_key")||"";
-  $("apiKey").value=k;
+window.addEventListener("DOMContentLoaded", () => {
+  $("apiKey").value = localStorage.getItem("apinex_key") || "";
+  const savedWorker = localStorage.getItem("apinex_worker");
+  if(savedWorker) $("workerUrl").value = savedWorker;
   updateStatus();
 });
 
 function updateStatus(){
-  const ok=!!$("apiKey").value.trim();
-  $("apiStatus").textContent=ok?"API key तैयार":"API key नहीं";
-  $("apiStatus").className="status "+(ok?"ok":"bad");
+  const ok = !!$("apiKey").value.trim();
+  $("apiStatus").textContent = ok ? "API Key सेव है" : "API Key नहीं";
+  $("apiStatus").className = "status " + (ok ? "ok" : "bad");
+  $("footerUrl").textContent = $("workerUrl").value.replace('https://', '');
 }
-$("apiKey").addEventListener("input",updateStatus);
+$("apiKey").addEventListener("input", updateStatus);
+$("workerUrl").addEventListener("input", updateStatus);
 
 function toggleKey(){
-  $("apiKey").type=$("apiKey").type==="password"?"text":"password";
-}
-function saveKey(){
-  const k=$("apiKey").value.trim();
-  if(!k)return alert("पहले API key डालें।");
-  localStorage.setItem("apinex_key",k);
-  updateStatus();
-  alert("API key सेव हो गई।");
-}
-function clearKey(){
-  localStorage.removeItem("apinex_key");$("apiKey").value="";updateStatus();
-}
-function getKey(){
-  const k=$("apiKey").value.trim();
-  if(!k) throw new Error("API key डालें।");
-  return k;
-}
-function switchMode(mode){
-  $("scriptMode").classList.toggle("active",mode==="script");
-  $("imageMode").classList.toggle("active",mode==="image");
-  $("scriptTab").classList.toggle("active",mode==="script");
-  $("imageTab").classList.toggle("active",mode==="image");
-}
-function setBusy(btn,busy,label){
-  btn.disabled=busy;
-  btn.innerHTML=busy?'<span class="loading"><span class="spinner"></span> काम हो रहा है…</span>':label;
+  $("apiKey").type = $("apiKey").type === "password" ? "text" : "password";
 }
 
-async function apiFetch(path,body){
-  const key=getKey();
-  try {
-    const r=await fetch(BASE+path,{
-      method:"POST",
-      headers:{"Authorization":"Bearer "+key,"Content-Type":"application/json"},
-      body:JSON.stringify(body)
-    });
-    const text=await r.text();
-    let data;try{data=JSON.parse(text)}catch{data={raw:text}}
-    if(!r.ok){
-      const msg=data?.error?.message||data?.message||data?.raw||("HTTP "+r.status);
-      throw new Error(msg);
-    }
-    return data;
-  } catch (error) {
-    throw new Error("Network Error: " + error.message);
+function saveSettings(){
+  const k = $("apiKey").value.trim();
+  const w = $("workerUrl").value.trim().replace(/\/$/, "");
+  if(!k) return alert("कृपया API Key दर्ज करें!");
+  localStorage.setItem("apinex_key", k);
+  localStorage.setItem("apinex_worker", w);
+  updateStatus();
+  alert("सेटिंग्स सेव हो गईं!");
+}
+
+function getBaseUrl(){
+  let url = $("workerUrl").value.trim().replace(/\/$/, "");
+  return url + "/v1";
+}
+
+function getKey(){
+  const k = $("apiKey").value.trim();
+  if(!k) throw new Error("कृपया पहले APInex API Key दर्ज करें!");
+  return k;
+}
+
+function switchMode(mode){
+  $("scriptMode").classList.toggle("active", mode === 'script');
+  $("imageMode").classList.toggle("active", mode === 'image');
+  $("scriptTab").classList.toggle("active", mode === 'script');
+  $("imageTab").classList.toggle("active", mode === 'image');
+}
+
+function setBusy(btn, busy, label){
+  btn.disabled = busy;
+  btn.innerHTML = busy ? '<span class="spinner"></span> प्रोसेस हो रहा है...' : label;
+}
+
+async function apiFetch(path, body){
+  const key = getKey();
+  const endpoint = getBaseUrl() + path;
+
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + key,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); } catch { data = { raw: text }; }
+
+  if(!res.ok){
+    const err = data?.error?.message || data?.message || data?.raw || ("HTTP " + res.status);
+    throw new Error(err);
   }
+  return data;
 }
 
 async function generateScript(){
-  const btn=$("scriptBtn"), topic=$("topic").value.trim();
-  if(!topic)return alert("पहले खबर/विषय लिखें।");
-  setBusy(btn,true,"⚡ स्क्रिप्ट बनाएं");
-  const start=performance.now();
-  $("scriptResult").textContent="स्क्रिप्ट तैयार की जा रही है…";
-  try{
-    const model=$("scriptModel").value;
-    const type=$("scriptType").value;
-    const system=`आप एक अनुभवी हिंदी न्यूज़ वीडियो स्क्रिप्ट लेखक हैं। स्क्रिप्ट प्रकार: ${type}। स्वाभाविक हिंदी का प्रयोग करें।`;
+  const btn = $("scriptBtn"), topic = $("topic").value.trim();
+  if(!topic) return alert("खबर या टॉपिक लिखें!");
+  
+  setBusy(btn, true, "⚡ स्क्रिप्ट बनाएं");
+  const start = performance.now();
+  $("scriptResult").textContent = "स्क्रिप्ट लिखी जा रही है...";
 
-    const data=await apiFetch("/chat/completions",{
-      model,
-      messages:[
-        {role:"system",content:system},
-        {role:"user",content:topic}
+  try {
+    const model = $("scriptModel").value;
+    const type = $("scriptType").value;
+    const system = `आप 'Aryan News Tech' के मुख्य स्क्रिप्ट राइटर हैं। स्क्रिप्ट का प्रकार: ${type}। भाषा: स्पष्ट, आकर्षक और प्रवाहपूर्ण हिंदी।`;
+
+    const data = await apiFetch("/chat/completions", {
+      model: model,
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: topic }
       ]
     });
 
-    const content=data?.choices?.[0]?.message?.content ?? data?.choices?.[0]?.text;
-    if(!content) throw new Error("API से आउटपुट नहीं मिला।");
-    
-    $("scriptResult").textContent=content;
-    $("modelStat").textContent=model;
-    const u=data?.usage||{};
-    $("tokenStat").textContent=((u.total_tokens ?? ((u.prompt_tokens || 0) + (u.completion_tokens || 0))) || "—");
-    $("timeStat").textContent=((performance.now()-start)/1000).toFixed(1)+"s";
-  }catch(e){
-    $("scriptResult").textContent="त्रुटि: "+e.message;
-    $("modelStat").textContent="Error";
-  }finally{setBusy(btn,false,"⚡ स्क्रिप्ट बनाएं")}
+    const content = data?.choices?.[0]?.message?.content || data?.choices?.[0]?.text;
+    if(!content) throw new Error("मॉडल से कोई रिस्पांस प्राप्त नहीं हुआ।");
+
+    $("scriptResult").textContent = content;
+    $("modelStat").textContent = model.replace('free/', '');
+    const u = data?.usage || {};
+    $("tokenStat").textContent = u.total_tokens || "N/A";
+    $("timeStat").textContent = ((performance.now() - start)/1000).toFixed(1) + "s";
+  } catch (e) {
+    $("scriptResult").textContent = "त्रुटि: " + e.message;
+    $("modelStat").textContent = "Error";
+  } finally {
+    setBusy(btn, false, "⚡ स्क्रिप्ट बनाएं");
+  }
 }
 
 async function generateImage(){
-  const btn=$("imageBtn"), prompt=$("imagePrompt").value.trim();
-  if(!prompt)return alert("पहले image prompt लिखें।");
-  setBusy(btn,true,"🎨 इमेज बनाएं");
+  const btn = $("imageBtn"), prompt = $("imagePrompt").value.trim();
+  if(!prompt) return alert("इमेज के लिए प्रॉम्प्ट लिखें!");
+  
+  setBusy(btn, true, "🎨 इमेज बनाएं");
   $("imageError").classList.add("hidden");
-  $("imagePreview").style.display="none";
-  try{
-    const body={
-      model:$("imageModel").value,
-      prompt,
-      aspect_ratio:$("aspect").value,
-      response_format:"url"
+  $("imagePreview").style.display = "none";
+
+  try {
+    const model = $("imageModel").value;
+    const body = {
+      model: model,
+      prompt: prompt,
+      aspect_ratio: $("aspect").value
     };
-    const data=await apiFetch("/images/generations",body);
+
+    const data = await apiFetch("/images/generations", body);
+    const imgUrl = data?.data?.[0]?.url || data?.images?.[0]?.url;
     
-    let imgUrl = data?.data?.[0]?.url || data?.images?.[0]?.url;
-    if(!imgUrl) throw new Error("इमेज URL प्राप्त नहीं हुआ।");
-    
-    $("imagePreview").src=imgUrl;
-    $("imagePreview").style.display="block";
-    $("scriptResult").textContent="इमेज सफलतापूर्वक तैयार हुई।";
-    $("modelStat").textContent=body.model;
-  }catch(e){
-    $("imageError").textContent="इमेज त्रुटि: "+e.message;
+    if(!imgUrl) throw new Error("इमेज जनरेट नहीं हो सकी या मॉडल सपोर्ट नहीं कर रहा।");
+
+    $("imagePreview").src = imgUrl;
+    $("imagePreview").style.display = "block";
+    $("scriptResult").textContent = "इमेज सफलतापूर्वक तैयार हो गई है। नीचे देखें।";
+    $("modelStat").textContent = model;
+  } catch(e) {
+    $("imageError").textContent = "इमेज त्रुटि: " + e.message;
     $("imageError").classList.remove("hidden");
-  }finally{setBusy(btn,false,"🎨 इमेज बनाएं")}
+  } finally {
+    setBusy(btn, false, "🎨 इमेज बनाएं");
+  }
 }
 
 function copyText(id){
-  const el=$(id), text=el.value!==undefined?el.value:el.textContent;
-  navigator.clipboard?.writeText(text).then(()=>alert("कॉपी हो गया।")).catch(()=>alert("कॉपी नहीं हुआ; मैनुअल कॉपी करें।"));
+  const el = $(id), text = el.value !== undefined ? el.value : el.textContent;
+  navigator.clipboard.writeText(text).then(() => alert("स्क्रिप्ट कॉपी हो गई!")).catch(() => alert("मैन्युअल कॉपी करें।"));
 }
 </script>
 </body>
