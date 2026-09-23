@@ -1,5 +1,5 @@
 // आपकी APInex API Key यहाँ सुरक्षित सेट है
-const APINEX_API_KEY = "sk-apxc23e1858ec4ca2b036573c7eb1df810"; 
+const APINEX_API_KEY = "sk-apxc23e18142011d2f30e1b3461fbf3d7a9dcff2510f04f810"; 
 
 export default {
   async fetch(request, env, ctx) {
