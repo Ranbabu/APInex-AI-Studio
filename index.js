@@ -1,6 +1,3 @@
-// आपकी APInex API Key यहाँ सुरक्षित सेट है
-const APINEX_API_KEY = "sk-apxc23e18142011d2f30e1b3461fbf3d7a9dcff2510f04f810"; 
-
 export default {
   async fetch(request, env, ctx) {
     const corsHeaders = {
@@ -15,21 +12,17 @@ export default {
 
     const url = new URL(request.url);
 
-    // होम स्टेटस चेक
-    if (url.pathname === '/' || url.pathname === '') {
-      return new Response(JSON.stringify({ status: "online", system: "Aryan News Tech Proxy" }), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      });
-    }
+    // यह सीधे आपके Cloudflare Secret (APINEX_API_KEY) से Key उठाएगा
+    const apiKey = env.APINEX_API_KEY;
 
     try {
       const targetUrl = 'https://api.apinex.bond' + url.pathname + url.search;
 
-      // हेडर क्लीनिंग और ऑथेंटिकेशन
       const cleanHeaders = new Headers();
       cleanHeaders.set('Content-Type', 'application/json');
-      // आपकी API Key वर्कर खुद जोड़ेगा (वेबसाइट पर डालने की ज़रूरत नहीं)
-      cleanHeaders.set('Authorization', `Bearer ${APINEX_API_KEY}`);
+      if (apiKey) {
+        cleanHeaders.set('Authorization', `Bearer ${apiKey.trim()}`);
+      }
 
       const fetchOptions = {
         method: request.method,
