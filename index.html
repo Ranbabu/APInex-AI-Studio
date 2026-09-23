@@ -3,177 +3,234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Aryan News Tech — Studio Pro</title>
+<title>Aryan News Tech — AI Script Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#07090e;--surface:#0e131f;--surface-2:#151c2c;--border:#1f293d;
-  --accent:#e11d48;--green:#10b981;--text:#f8fafc;--muted:#94a3b8;--radius:14px;
+:root {
+  --bg: #07090e;
+  --surface: #0f141f;
+  --surface-2: #161e2e;
+  --border: #232d42;
+  --accent: #e11d48;
+  --green: #10b981;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --radius: 14px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans','Noto Sans Devanagari',sans-serif;padding:12px;padding-bottom:80px}
-.container{max-width:880px;margin:auto}
-header{display:flex;justify-content:space-between;align-items:center;padding:12px 0 16px 0;border-bottom:1px solid var(--border);margin-bottom:16px}
-.brand{display:flex;align-items:center;gap:10px}
-.live-pill{background:var(--accent);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.tab{background:var(--surface-2);border:1px solid var(--border);color:var(--muted);padding:12px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:0.2s}
-.tab.active{background:rgba(225,29,72,0.15);border-color:var(--accent);color:#fff}
-.tab-content{display:none}.tab-content.active{display:block}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{margin-bottom:12px}
-label{display:block;font-size:12px;font-weight:700;color:#cbd5e1;margin-bottom:6px}
-input,select,textarea{width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:#fff;font-size:14px;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-textarea{min-height:105px;resize:vertical}
-.btn-row{display:flex;gap:8px;margin-top:6px}
-.btn{background:var(--surface-2);color:#fff;border:1px solid var(--border);padding:12px 18px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:0.2s}
-.btn:hover{background:#1e293b}
-.btn-primary{background:linear-gradient(135deg,#e11d48,#be123c);border:none;flex:1}
-.btn-green{background:linear-gradient(135deg,#10b981,#059669);border:none;flex:1}
-.btn:disabled{opacity:0.5;cursor:not-allowed}
-.result-box{background:#06080d;border:1px solid var(--border);border-radius:12px;padding:16px;min-height:180px;white-space:pre-wrap;font-size:14px;line-height:1.7}
-.notice{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;padding:10px;border-radius:8px;font-size:12px;margin-top:10px;display:none}
-.spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:s .7s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-#thumbPreview{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;border:1px solid var(--border);background:#000;display:none;margin-top:14px}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.btn-row{flex-direction:column}}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+  padding: 14px;
+  padding-bottom: 80px;
+}
+.container { max-width: 860px; margin: 0 auto; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 18px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.live-pill {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field { margin-bottom: 14px; }
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+input, select, textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 13px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.25);
+}
+textarea { min-height: 110px; resize: vertical; }
+.btn-row { display: flex; gap: 10px; margin-top: 6px; }
+.btn {
+  background: var(--surface-2);
+  color: #fff;
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+.btn:hover { background: #1e293b; }
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  border: none;
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.35);
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.result-box {
+  background: #080b12;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  min-height: 200px;
+}
+.spinner {
+  width: 15px; height: 15px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.badge-ok { color: var(--green); font-size: 12px; font-weight: 700; }
+.notice {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-top: 12px;
+  display: none;
+}
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+
 <div class="container">
   <header>
     <div class="brand">
       <span class="live-pill">ANT LIVE</span>
       <div>
         <b style="font-size:16px;">Aryan News Tech</b>
-        <span style="font-size:11px;color:var(--muted);display:block;">100% Free AI News & Thumbnail Studio</span>
+        <span style="font-size:11px;color:var(--muted);display:block;">AI Script Teleprompter</span>
       </div>
     </div>
-    <div style="font-size:12px;color:var(--green);font-weight:700;">● 1M Free Token Active</div>
+    <div class="badge-ok">● Cloudflare API Connected</div>
   </header>
 
-  <!-- मोड टॉगल टैब्स -->
-  <div class="tabs">
-    <button id="tTab1" class="tab active" onclick="switchTab('script')">📝 1. न्यूज़ स्क्रिप्ट (APInex Free)</button>
-    <button id="tTab2" class="tab" onclick="switchTab('thumb')">🖼️ 2. 16:9 न्यूज़ थंबनेल (Free AI)</button>
-  </div>
-
-  <!-- 1. स्क्रिप्ट जनरेटर टैब -->
-  <div id="scriptSection" class="tab-content active">
-    <div class="card">
-      <div class="grid">
-        <div class="field">
-          <label>1. केवल 100% Free AI मॉडल्स (Auto-Filtered)</label>
-          <select id="modelSelect">
-            <option value="free/gemini-3.8-flash">free/gemini-3.8-flash (Recommended)</option>
-            <option value="free/mimo-v2.6-pro">free/mimo-v2.6-pro</option>
-            <option value="free/mimo-v2.6-flash">free/mimo-v2.6-flash</option>
-            <option value="free/deepseek-v4.1-flash">free/deepseek-v4.1-flash</option>
-            <option value="free/claude-sonnet-4.6">free/claude-sonnet-4.6</option>
-            <option value="free/gpt-5.6-luna">free/gpt-5.6-luna</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>2. फॉर्मेट</label>
-          <select id="format">
-            <option value="breaking">🔥 ब्रेकिंग न्यूज़ (1 मिनट फास्ट)</option>
-            <option value="bulletin" selected>📺 मुख्य बुलेटिन (3-5 मिनट विस्तृत)</option>
-            <option value="shorts">📱 YouTube Shorts / Reels (60s)</option>
-            <option value="top10">🔟 टॉप 10 फटाफट खबरें</option>
-          </select>
-        </div>
+  <div class="card">
+    <div class="grid">
+      <div class="field">
+        <label>1. AI मॉडल (APInex Live Models)</label>
+        <select id="modelSelect">
+          <option value="loading">मॉडल्स लोड हो रहे हैं...</option>
+        </select>
       </div>
 
       <div class="field">
-        <label>3. खबर का विषय / हेडलाइन</label>
-        <textarea id="topic" placeholder="उदाहरण: भारत ने पाकिस्तान को फिर लताड़ा, UN में भेजे पत्र पर विदेश मंत्रालय ने खोली पोल..."></textarea>
+        <label>2. फॉर्मेट</label>
+        <select id="format">
+          <option value="breaking">🔥 ब्रेकिंग न्यूज़ (1 मिनट फास्ट)</option>
+          <option value="bulletin" selected>📺 मुख्य बुलेटिन (3-5 मिनट विस्तृत)</option>
+          <option value="shorts">📱 YouTube Shorts / Reels (60 सेकंड्स)</option>
+          <option value="top10">🔟 टॉप 10 फटाफट खबरें</option>
+        </select>
       </div>
-
-      <div class="btn-row">
-        <button id="genBtn" class="btn btn-primary" onclick="generateScript()">⚡ न्यूज़ स्क्रिप्ट बनाएं</button>
-        <button class="btn" onclick="copyText('output')">📋 कॉपी करें</button>
-      </div>
-
-      <div id="errBox" class="notice"></div>
     </div>
 
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <label style="margin:0;">📝 तैयार टेलीप्रॉम्प्टर स्क्रिप्ट</label>
-        <button class="btn" style="padding:6px 12px;font-size:12px;" onclick="transferToThumb()">🎨 इसी स्क्रिप्ट से थंबनेल बनाएं ➔</button>
-      </div>
-      <div id="output" class="result-box">यहाँ आपकी स्क्रिप्ट तैयार होकर आएगी...</div>
+    <div class="field">
+      <label>3. खबर का विषय / हेडलाइन</label>
+      <textarea id="topic" placeholder="उदाहरण: आज की टॉप 5 बड़ी राष्ट्रीय खबरें, एंकरिंग स्टाइल में तैयार करें..."></textarea>
     </div>
+
+    <div class="btn-row">
+      <button id="genBtn" class="btn btn-primary" onclick="generateScript()">
+        ✨ न्यूज़ स्क्रिप्ट जनरेट करें
+      </button>
+      <button class="btn" onclick="copyScript()">📋 कॉपी करें</button>
+    </div>
+
+    <div id="errBox" class="notice"></div>
   </div>
 
-  <!-- 2. थंबनेल जनरेटर टैब -->
-  <div id="thumbSection" class="tab-content">
-    <div class="card">
-      <div class="field">
-        <label>YouTube 16:9 थंबनेल प्रॉम्प्ट (हिंदी या अंग्रेज़ी)</label>
-        <textarea id="thumbPrompt" placeholder="उदाहरण: Indian news channel breaking news studio, angry tv anchor, bold red graphics, hyper-realistic, dramatic lighting, 8k resolution..."></textarea>
-      </div>
-
-      <div class="btn-row">
-        <button id="imgBtn" class="btn btn-green" onclick="generateThumbnail()">🎨 16:9 YouTube थंबनेल जनरेट करें (Free HD)</button>
-      </div>
-
-      <div id="imgLoading" style="display:none;text-align:center;padding:20px;color:var(--muted);">
-        <span class="spinner" style="margin:auto;margin-bottom:8px;"></span>
-        16:9 HD थंबनेल तैयार हो रहा है, कृपया 5 सेकंड रुकें...
-      </div>
-
-      <img id="thumbPreview" alt="YouTube Thumbnail">
-
-      <div id="downloadBtnBox" style="display:none;margin-top:12px;">
-        <a id="downloadLink" class="btn" style="width:100%;text-decoration:none;" download="news_thumbnail.jpg" target="_blank">📥 फुल HD थंबनेल डाउनलोड करें</a>
-      </div>
-    </div>
+  <div class="card">
+    <label style="margin-bottom:8px;">📝 तैयार टेलीप्रॉम्प्टर स्क्रिप्ट</label>
+    <div id="output" class="result-box">यहाँ आपकी प्रोफेशनल न्यूज़ स्क्रिप्ट [एंकर विजुअल और वॉइसओवर] के साथ बनकर तैयार होगी...</div>
   </div>
 </div>
 
 <script>
+// आपका Cloudflare Worker URL
 const WORKER_BASE = "https://apinex-ai-studio.babu902654.workers.dev/v1";
 const $ = id => document.getElementById(id);
 
-// 1. केवल free/ वाले मॉडल्स को फ़िल्टर करके ड्रॉपडाउन में जोड़ना
+// पेज लोड होते ही APInex से लाइव असली मॉडल्स की लिस्ट लाएगा
 window.addEventListener("DOMContentLoaded", async () => {
   const select = $("modelSelect");
   try {
     const res = await fetch(`${WORKER_BASE}/models`);
     const data = await res.json();
     
-    if (data.data && Array.isArray(data.data)) {
-      // केवल वही मॉडल रखें जिनके नाम में 'free/' है
-      const freeOnly = data.data.filter(m => m.id.startsWith("free/"));
-      
-      if (freeOnly.length > 0) {
-        select.innerHTML = "";
-        freeOnly.forEach(m => {
-          const opt = document.createElement("option");
-          opt.value = m.id;
-          opt.textContent = m.id;
-          if (m.id === "free/gemini-3.8-flash") opt.selected = true;
-          select.appendChild(opt);
-        });
-      }
+    if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+      select.innerHTML = "";
+      data.data.forEach(m => {
+        const opt = document.createElement("option");
+        opt.value = m.id;
+        opt.textContent = m.id;
+        // अगर MiMo या Gemini दिखे तो डिफ़ॉल्ट सेलेक्ट करें
+        if(m.id.includes("mimo") || m.id.includes("gemini") || m.id.includes("free")) {
+          opt.selected = true;
+        }
+        select.appendChild(opt);
+      });
+    } else {
+      fallbackModels();
     }
   } catch (e) {
-    console.log("Using cached free models list");
+    fallbackModels();
   }
 });
 
-function switchTab(t){
-  $("scriptSection").classList.toggle("active", t === 'script');
-  $("thumbSection").classList.toggle("active", t === 'thumb');
-  $("tTab1").classList.toggle("active", t === 'script');
-  $("tTab2").classList.toggle("active", t === 'thumb');
+function fallbackModels() {
+  const select = $("modelSelect");
+  select.innerHTML = `
+    <option value="mimo-2.6-pro" selected>mimo-2.6-pro</option>
+    <option value="mimo-2.6-flash">mimo-2.6-flash</option>
+    <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+    <option value="free/mimo-2.6-pro">free/mimo-2.6-pro</option>
+  `;
 }
 
-// 2. स्क्रिप्ट जनरेट करने का फंक्शन
 async function generateScript() {
   const topic = $("topic").value.trim();
   const model = $("modelSelect").value;
@@ -190,10 +247,10 @@ async function generateScript() {
 
   const systemPrompt = `आप 'Aryan News Tech' के मुख्य टीवी न्यूज़ एंकर हैं। 
 नियम:
-1. भाषा: 100% स्वाभाविक, तेज और दमदार हिंदी।
+1. भाषा: प्राकृतिक, तेज और दमदार हिंदी।
 2. प्रारूप: [एंकर ऑन कैमरा], [ग्राफिक्स/विजुअल्स], [साउंड इफेक्ट] के साथ लिखें।
 3. प्रारूप शैली: ${format}
-4. शुरुआत एक धमाकेदार हुक से करें।`;
+4. शुरुआत एक धमाकेदार हुक लाइन से करें।`;
 
   try {
     const res = await fetch(`${WORKER_BASE}/chat/completions`, {
@@ -210,69 +267,30 @@ async function generateScript() {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data?.error?.message || data?.message || "HTTP Error " + res.status);
+
+    if (!res.ok) {
+      throw new Error(data?.error?.message || data?.message || ("HTTP Error " + res.status));
+    }
 
     const content = data?.choices?.[0]?.message?.content || data?.choices?.[0]?.text;
-    if (!content) throw new Error("मॉडल से कोई उत्तर नहीं मिला।");
+    if (!content) throw new Error("मॉडल से खाली उत्तर प्राप्त हुआ।");
 
     $("output").innerText = content;
+
   } catch (err) {
-    errBox.innerText = "⚠️ त्रुटि: " + err.message;
+    errBox.innerText = "⚠️ त्रुटि: " + err.message + "\n\n(सुझाव: ऊपर ड्रॉपडाउन से कोई अन्य मॉडल चुनकर फिर 'जनरेट' दबाएं)";
     errBox.style.display = "block";
-    $("output").innerText = "स्क्रिप्ट जनरेट नहीं हो सकी।";
+    $("output").innerText = "स्क्रिप्ट जनरेट नहीं हो सकी। लाल बॉक्स में संदेश देखें।";
   } finally {
     btn.disabled = false;
-    btn.innerHTML = "⚡ न्यूज़ स्क्रिप्ट बनाएं";
+    btn.innerHTML = "✨ न्यूज़ स्क्रिप्ट जनरेट करें";
   }
 }
 
-// 3. स्क्रिप्ट से थंबनेल प्रॉम्प्ट ऑटो बनाना
-function transferToThumb(){
-  const topic = $("topic").value.trim();
-  if(!topic) return alert("पहले खबर का विषय लिखें या स्क्रिप्ट बनाएं!");
-  
-  $("thumbPrompt").value = `Breaking news YouTube thumbnail about: ${topic}, dramatic red studio lights, Indian news channel broadcast style, highly detailed 3D text, realistic faces, 8K ultra HD`;
-  switchTab('thumb');
-  generateThumbnail();
-}
-
-// 4. 16:9 YouTube थंबनेल इंजन (100% Free AI Engine)
-function generateThumbnail(){
-  const prompt = $("thumbPrompt").value.trim();
-  if(!prompt) return alert("थंबनेल के लिए प्रॉम्प्ट लिखें!");
-
-  const btn = $("imgBtn");
-  const loading = $("imgLoading");
-  const img = $("thumbPreview");
-  const dBox = $("downloadBtnBox");
-
-  btn.disabled = true;
-  loading.style.display = "block";
-  img.style.display = "none";
-  dBox.style.display = "none";
-
-  // 1280x720 = Exact 16:9 YouTube Thumbnail ratio
-  const seed = Math.floor(Math.random() * 10000000);
-  const fullPrompt = encodeURIComponent(prompt + ", 16:9 aspect ratio, youtube thumbnail style, 4k resolution");
-  const imageUrl = `https://image.pollinations.ai/prompt/${fullPrompt}?width=1280&height=720&nologo=true&seed=${seed}`;
-
-  img.onload = () => {
-    loading.style.display = "none";
-    img.style.display = "block";
-    btn.disabled = false;
-    dBox.style.display = "block";
-    $("downloadLink").href = imageUrl;
-  };
-  img.onerror = () => {
-    loading.style.display = "none";
-    btn.disabled = false;
-    alert("इमेज लोड होने में समस्या आई, दोबारा कोशिश करें!");
-  };
-  img.src = imageUrl;
-}
-
-function copyText(id) {
-  navigator.clipboard.writeText($(id).innerText).then(() => alert("✅ कॉपी हो गई!"));
+function copyScript() {
+  navigator.clipboard.writeText($("output").innerText).then(() => {
+    alert("✅ स्क्रिप्ट कॉपी हो गई!");
+  });
 }
 </script>
 </body>
