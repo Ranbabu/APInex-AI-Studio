@@ -3,75 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Aryan News Tech — Studio Pro</title>
+<title>Aryan News Tech — AI Script Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#080b11;--card:#101623;--border:#1e293b;--accent:#e11d48;
-  --green:#10b981;--text:#f8fafc;--muted:#94a3b8;
+:root {
+  --bg: #07090e;
+  --surface: #0f141f;
+  --surface-2: #161e2e;
+  --border: #232d42;
+  --accent: #e11d48;
+  --green: #10b981;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --radius: 14px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans','Noto Sans Devanagari',sans-serif;padding:12px;padding-bottom:70px}
-.container{max-width:850px;margin:auto}
-header{display:flex;justify-content:space-between;align-items:center;padding:12px 0 16px 0;border-bottom:1px solid var(--border);margin-bottom:16px}
-.logo-box{display:flex;align-items:center;gap:10px}
-.live-tag{background:var(--accent);color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.field{margin-bottom:12px}
-label{display:block;font-size:12px;font-weight:700;color:#cbd5e1;margin-bottom:5px}
-input,select,textarea{width:100%;background:#0b0f19;border:1px solid var(--border);border-radius:10px;padding:11px 12px;color:#fff;font-size:14px;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-textarea{min-height:100px;resize:vertical}
-.btn{background:#1e293b;color:#fff;border:1px solid var(--border);padding:11px 18px;border-radius:10px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn-primary{background:var(--accent);border:none;flex:1;box-shadow:0 4px 15px rgba(225,29,72,0.3)}
-.btn:disabled{opacity:0.5;cursor:not-allowed}
-.result-box{background:#06080d;border:1px solid var(--border);border-radius:12px;padding:16px;min-height:180px;white-space:pre-wrap;font-size:14px;line-height:1.7}
-.error-msg{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;padding:10px;border-radius:8px;font-size:12px;margin-top:10px;display:none}
-.spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:s .7s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+  padding: 14px;
+  padding-bottom: 80px;
+}
+.container { max-width: 860px; margin: 0 auto; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 18px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.live-pill {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field { margin-bottom: 14px; }
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+input, select, textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 13px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.25);
+}
+textarea { min-height: 110px; resize: vertical; }
+.btn-row { display: flex; gap: 10px; margin-top: 6px; }
+.btn {
+  background: var(--surface-2);
+  color: #fff;
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+.btn:hover { background: #1e293b; }
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  border: none;
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.35);
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.result-box {
+  background: #080b12;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  min-height: 200px;
+}
+.spinner {
+  width: 15px; height: 15px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.badge-ok { color: var(--green); font-size: 12px; font-weight: 700; }
+.notice {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-top: 12px;
+  display: none;
+}
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+
 <div class="container">
   <header>
-    <div class="logo-box">
-      <span class="live-tag">LIVE</span>
+    <div class="brand">
+      <span class="live-pill">ANT LIVE</span>
       <div>
-        <b style="font-size:16px">Aryan News Tech</b>
-        <span style="font-size:11px;color:var(--muted);display:block">AI News Script Studio</span>
+        <b style="font-size:16px;">Aryan News Tech</b>
+        <span style="font-size:11px;color:var(--muted);display:block;">AI Script Teleprompter</span>
       </div>
     </div>
-    <div style="font-size:12px;color:var(--green)">● Balance: $0.10 Active</div>
+    <div class="badge-ok">● Cloudflare API Connected</div>
   </header>
 
   <div class="card">
-    <div class="field">
-      <label>1. APInex API Key</label>
-      <input id="apiKey" type="password" placeholder="sk-apxc23e18..." autocomplete="off">
-    </div>
-
     <div class="grid">
       <div class="field">
-        <label>2. AI मॉडल (Official Free Models)</label>
-        <select id="modelSelect" onchange="syncModel(this.value)">
-          <optgroup label="Xiaomi MiMo (New)">
-            <option value="mimo-2.6-pro" selected>mimo-2.6-pro (Telegram Featured)</option>
-            <option value="mimo-2.6-flash">mimo-2.6-flash</option>
-            <option value="free/mimo-2.6-pro">free/mimo-2.6-pro</option>
-          </optgroup>
-          <optgroup label="Gemini & Others">
-            <option value="gemini-2.5-flash">gemini-2.5-flash</option>
-            <option value="free/gemini-2.5-flash">free/gemini-2.5-flash</option>
-            <option value="free/glm-5.3-flash">free/glm-5.3-flash</option>
-          </optgroup>
+        <label>1. AI मॉडल (APInex Live Models)</label>
+        <select id="modelSelect">
+          <option value="loading">मॉडल्स लोड हो रहे हैं...</option>
         </select>
       </div>
 
       <div class="field">
-        <label>या APInex से कॉपी किया नाम यहाँ पेस्ट करें</label>
-        <input id="customModel" type="text" value="mimo-2.6-pro" placeholder="उदा: mimo-2.6-pro">
+        <label>2. फॉर्मेट</label>
+        <select id="format">
+          <option value="breaking">🔥 ब्रेकिंग न्यूज़ (1 मिनट फास्ट)</option>
+          <option value="bulletin" selected>📺 मुख्य बुलेटिन (3-5 मिनट विस्तृत)</option>
+          <option value="shorts">📱 YouTube Shorts / Reels (60 सेकंड्स)</option>
+          <option value="top10">🔟 टॉप 10 फटाफट खबरें</option>
+        </select>
       </div>
     </div>
 
@@ -80,64 +173,89 @@ textarea{min-height:100px;resize:vertical}
       <textarea id="topic" placeholder="उदाहरण: आज की टॉप 5 बड़ी राष्ट्रीय खबरें, एंकरिंग स्टाइल में तैयार करें..."></textarea>
     </div>
 
-    <div style="display:flex;gap:10px">
-      <button id="genBtn" class="btn btn-primary" onclick="generateScript()">⚡ न्यूज़ स्क्रिप्ट बनाएं</button>
-      <button class="btn" onclick="copyResult()">📋 कॉपी करें</button>
+    <div class="btn-row">
+      <button id="genBtn" class="btn btn-primary" onclick="generateScript()">
+        ✨ न्यूज़ स्क्रिप्ट जनरेट करें
+      </button>
+      <button class="btn" onclick="copyScript()">📋 कॉपी करें</button>
     </div>
 
-    <div id="errBox" class="error-msg"></div>
+    <div id="errBox" class="notice"></div>
   </div>
 
   <div class="card">
-    <label style="margin-bottom:8px">📝 टेलीप्रॉम्प्टर आउटपुट</label>
-    <div id="output" class="result-box">यहाँ आपकी प्रोफेशनल न्यूज़ स्क्रिप्ट तैयार होकर आएगी...</div>
+    <label style="margin-bottom:8px;">📝 तैयार टेलीप्रॉम्प्टर स्क्रिप्ट</label>
+    <div id="output" class="result-box">यहाँ आपकी प्रोफेशनल न्यूज़ स्क्रिप्ट [एंकर विजुअल और वॉइसओवर] के साथ बनकर तैयार होगी...</div>
   </div>
 </div>
 
 <script>
-const PROXY = "https://apinex-ai-studio.babu902654.workers.dev/v1/chat/completions";
+// आपका Cloudflare Worker URL
+const WORKER_BASE = "https://apinex-ai-studio.babu902654.workers.dev/v1";
 const $ = id => document.getElementById(id);
 
-window.onload = () => {
-  const k = localStorage.getItem("apinex_key");
-  if(k) $("apiKey").value = k;
-};
+// पेज लोड होते ही APInex से लाइव असली मॉडल्स की लिस्ट लाएगा
+window.addEventListener("DOMContentLoaded", async () => {
+  const select = $("modelSelect");
+  try {
+    const res = await fetch(`${WORKER_BASE}/models`);
+    const data = await res.json();
+    
+    if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+      select.innerHTML = "";
+      data.data.forEach(m => {
+        const opt = document.createElement("option");
+        opt.value = m.id;
+        opt.textContent = m.id;
+        // अगर MiMo या Gemini दिखे तो डिफ़ॉल्ट सेलेक्ट करें
+        if(m.id.includes("mimo") || m.id.includes("gemini") || m.id.includes("free")) {
+          opt.selected = true;
+        }
+        select.appendChild(opt);
+      });
+    } else {
+      fallbackModels();
+    }
+  } catch (e) {
+    fallbackModels();
+  }
+});
 
-function syncModel(val){
-  $("customModel").value = val;
+function fallbackModels() {
+  const select = $("modelSelect");
+  select.innerHTML = `
+    <option value="mimo-2.6-pro" selected>mimo-2.6-pro</option>
+    <option value="mimo-2.6-flash">mimo-2.6-flash</option>
+    <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+    <option value="free/mimo-2.6-pro">free/mimo-2.6-pro</option>
+  `;
 }
 
-async function generateScript(){
-  const key = $("apiKey").value.trim();
+async function generateScript() {
   const topic = $("topic").value.trim();
-  const model = $("customModel").value.trim();
+  const model = $("modelSelect").value;
+  const format = $("format").value;
 
-  if(!key) return alert("कृपया APInex API Key डालें!");
-  if(!topic) return alert("कृपया खबर का विषय लिखें!");
-  if(!model) return alert("कृपया मॉडल नाम लिखें!");
-
-  localStorage.setItem("apinex_key", key);
+  if (!topic) return alert("कृपया खबर का विषय लिखें!");
 
   const btn = $("genBtn");
-  const err = $("errBox");
-  err.style.display = "none";
+  const errBox = $("errBox");
+  errBox.style.display = "none";
   btn.disabled = true;
   btn.innerHTML = `<span class="spinner"></span> स्क्रिप्ट लिखी जा रही है...`;
-  $("output").innerText = "AI स्क्रिप्ट तैयार कर रहा है...";
+  $("output").innerText = "AI टेलीप्रॉम्प्टर के लिए स्क्रिप्ट लिख रहा है...";
 
-  const systemPrompt = `आप 'Aryan News Tech' के मुख्य टीवी न्यूज़ एंकर और राइटर हैं। 
+  const systemPrompt = `आप 'Aryan News Tech' के मुख्य टीवी न्यूज़ एंकर हैं। 
 नियम:
-1. भाषा: प्राकृतिक, तेज और गंभीर हिंदी।
-2. प्रारूप: [एंकर ऑन कैमरा], [विजुअल्स/फुटेज], [साउंड इफेक्ट/SFX] के साथ लिखें।
-3. शुरुआत धमाकेदार ब्रेकिंग हेडलाइन से करें।`;
+1. भाषा: प्राकृतिक, तेज और दमदार हिंदी।
+2. प्रारूप: [एंकर ऑन कैमरा], [ग्राफिक्स/विजुअल्स], [साउंड इफेक्ट] के साथ लिखें।
+3. प्रारूप शैली: ${format}
+4. शुरुआत एक धमाकेदार हुक लाइन से करें।`;
 
   try {
-    const res = await fetch(PROXY, {
+    const res = await fetch(`${WORKER_BASE}/chat/completions`, {
       method: "POST",
-      headers: {
-        "Authorization": "Bearer " + key,
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         model: model,
         messages: [
@@ -150,27 +268,29 @@ async function generateScript(){
 
     const data = await res.json();
 
-    if(!res.ok){
-      throw new Error(data?.error?.message || data?.message || ("Error " + res.status));
+    if (!res.ok) {
+      throw new Error(data?.error?.message || data?.message || ("HTTP Error " + res.status));
     }
 
     const content = data?.choices?.[0]?.message?.content || data?.choices?.[0]?.text;
-    if(!content) throw new Error("मॉडल से खाली उत्तर मिला।");
+    if (!content) throw new Error("मॉडल से खाली उत्तर प्राप्त हुआ।");
 
     $("output").innerText = content;
 
-  } catch(e) {
-    err.innerText = "⚠️ त्रुटि: " + e.message + "\n\nसुझाव: अगर यह मॉडल सब्सक्रिप्शन मांगे, तो ड्रॉपडाउन से दूसरा मॉडल (उदा: mimo-2.6-flash या free/mimo-2.6-pro) चुनें।";
-    err.style.display = "block";
-    $("output").innerText = "स्क्रिप्ट जनरेट नहीं हो सकी। ऊपर लाल बॉक्स में कारण देखें।";
+  } catch (err) {
+    errBox.innerText = "⚠️ त्रुटि: " + err.message + "\n\n(सुझाव: ऊपर ड्रॉपडाउन से कोई अन्य मॉडल चुनकर फिर 'जनरेट' दबाएं)";
+    errBox.style.display = "block";
+    $("output").innerText = "स्क्रिप्ट जनरेट नहीं हो सकी। लाल बॉक्स में संदेश देखें।";
   } finally {
     btn.disabled = false;
-    btn.innerHTML = "⚡ न्यूज़ स्क्रिप्ट बनाएं";
+    btn.innerHTML = "✨ न्यूज़ स्क्रिप्ट जनरेट करें";
   }
 }
 
-function copyResult(){
-  navigator.clipboard.writeText($("output").innerText).then(() => alert("स्क्रिप्ट कॉपी हो गई!"));
+function copyScript() {
+  navigator.clipboard.writeText($("output").innerText).then(() => {
+    alert("✅ स्क्रिप्ट कॉपी हो गई!");
+  });
 }
 </script>
 </body>
