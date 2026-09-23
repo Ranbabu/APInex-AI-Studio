@@ -3,352 +3,499 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#f7f9fc">
-<title>Aryan News Tech — AI Studio</title>
+<title>Aryan News Tech — AI Script Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f6f8fc;--card:#fff;--text:#18202b;--muted:#687386;--line:#dce3ec;
-  --accent:#16b85b;--accent2:#087f4b;--blue:#3478f6;--danger:#e5484d;
-  --shadow:0 10px 30px rgba(28,42,61,.08);--radius:20px;
+:root {
+  --bg: #07090e;
+  --surface: #0f141f;
+  --surface-2: #161e2e;
+  --border: #232d42;
+  --accent: #e11d48;
+  --accent-glow: rgba(225, 29, 72, 0.25);
+  --green: #10b981;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --radius: 16px;
 }
-*{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#f9fbff,#f2f6fb);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.app{max-width:1050px;margin:auto;padding-bottom:100px}
-header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.header-inner{padding:14px 16px;display:flex;align-items:center;gap:12px}
-.logo{width:44px;height:44px;border-radius:14px;background:#111;color:#fff;display:grid;place-items:center;font-weight:900}
-.head-title{flex:1}.head-title b{display:block;font-size:18px}.head-title span{font-size:12px;color:var(--muted)}
-.status{font-size:11px;border:1px solid var(--line);padding:7px 9px;border-radius:999px;background:#fff}
-.status.ok{color:var(--accent2);border-color:#a8e7c3;background:#effcf4}
-.status.bad{color:var(--danger);border-color:#f0b4b7;background:#fff5f5}
 
-main{padding:18px 14px}
-.hero{background:linear-gradient(135deg,#0f1720,#263442);color:#fff;border-radius:26px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
-.hero h1{margin:0 0 8px;font-size:27px;line-height:1.15}
-.hero p{margin:0;color:#d7dee7;line-height:1.6;font-size:14px}
-.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.pill{border:1px solid rgba(255,255,255,.22);padding:7px 10px;border-radius:999px;font-size:12px;color:#eef4fa}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin-bottom:16px;box-shadow:var(--shadow)}
-.card h2{font-size:18px;margin:0 0 13px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field label{display:block;font-size:12px;font-weight:800;color:#566276;margin:0 0 6px}
-input,textarea,select{width:100%;border:1px solid #d7dfe9;background:#fbfcfe;border-radius:13px;padding:12px 13px;color:var(--text);outline:none;transition:.2s}
-input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(52,120,246,.1)}
-textarea{min-height:130px;resize:vertical;line-height:1.55}
-.key-row{display:flex;gap:8px}.key-row input{flex:1}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.btn{border:1.5px solid #cbd5e1;background:#fff;color:#263243;border-radius:13px;padding:11px 15px;font-weight:800;transition:.15s}
-.btn:hover{box-shadow:0 6px 16px rgba(35,52,75,.12)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#062d19}
-.btn.blue{background:#eaf2ff;border-color:#9fc1ff;color:#1554b8}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
-.tab{padding:12px;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-weight:900}
-.tab.active{border-color:var(--accent);background:#effcf4;color:#087f4b}
-.mode{display:none}.mode.active{display:block}
-.result{white-space:pre-wrap;background:#10151b;color:#eaf1f7;border-radius:16px;padding:15px;min-height:180px;line-height:1.7;font-size:14px;overflow:auto}
-.spinner{width:14px;height:14px;border:2px solid #b7c2ce;border-top-color:#087f4b;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
-@keyframes spin{to{transform:rotate(360deg)}}
-#imagePreview{width:100%;max-height:500px;object-fit:contain;border-radius:16px;border:1px solid var(--line);background:#f1f4f8;display:none;margin-top:12px;}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.stat{border:1px solid var(--line);border-radius:13px;padding:10px;background:#fafbfd}.stat b{display:block;font-size:16px}.stat span{font-size:10px;color:var(--muted)}
-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);border-top:1px solid var(--line);z-index:30}
-.footer-inner{max-width:1050px;margin:auto;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
-.notice{padding:11px 13px;border-radius:13px;background:#fff5f5;border:1px solid #f0b4b7;color:#bd2e34;font-size:13px}
-.hidden{display:none!important}
-@media(max-width:680px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 20px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.live-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.brand h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+.brand span { font-size: 12px; color: var(--muted); display: block; }
+
+.key-pill {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  transition: 0.2s;
+}
+.key-pill.active { border-color: var(--green); color: var(--green); }
+
+/* Card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Grid & Inputs */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.field { margin-bottom: 14px; }
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+input, select, textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* Action Buttons */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.btn {
+  background: var(--surface-2);
+  color: #fff;
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn:hover { background: #1e293b; border-color: #475569; }
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  border: none;
+  box-shadow: 0 4px 18px var(--accent-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(225, 29, 72, 0.4);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Result Box */
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.output-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.result-box {
+  background: #090c14;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  min-height: 220px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Collapsible Settings Drawer */
+#keyDrawer {
+  display: none;
+  background: #0b111e;
+  border: 1px dashed #334155;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-top: 12px;
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .btn-row { flex-direction: column; }
+}
 </style>
 </head>
 <body>
-<div class="app">
-<header>
-  <div class="header-inner">
-    <div class="logo">ANT</div>
-    <div class="head-title"><b>Aryan News Tech</b><span>Script + Image Studio</span></div>
-    <div id="apiStatus" class="status">API key नहीं</div>
-  </div>
-</header>
 
-<main>
-<section class="hero">
-  <h1>आपका AI न्यूज़ स्टूडियो</h1>
-  <p>APInex Free मॉडल्स के साथ अपनी हिंदी न्यूज़ स्क्रिप्ट्स और थंबनेल्स तैयार करें।</p>
-  <div class="pills">
-    <span class="pill">Gemini 3.8 Flash</span>
-    <span class="pill">GPT-5.6 Luna</span>
-    <span class="pill">GLM 5.3</span>
-    <span class="pill">Nano Banana 2</span>
-  </div>
-</section>
+<div class="container">
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="live-badge"><span class="live-dot"></span> AI NEWS</div>
+      <div>
+        <h1>Aryan News Tech</h1>
+        <span>Studio Pro — 100% Free Daily Edition</span>
+      </div>
+    </div>
+    <div id="keyStatusBtn" class="key-pill" onclick="toggleKeyDrawer()">
+      🔑 <span id="keyLabel">API Key दर्ज करें</span>
+    </div>
+  </header>
 
-<section class="card">
-  <h2>1. Cloudflare Proxy & API Key</h2>
-  <div class="field" style="margin-bottom: 10px;">
-    <label>Cloudflare Worker Proxy URL</label>
-    <input id="workerUrl" type="text" value="https://apinex-ai-studio.babu902654.workers.dev" placeholder="https://your-worker.workers.dev">
-  </div>
-  <div class="field">
-    <label>APInex API Key (sk-apxc...)</label>
-    <div class="key-row">
+  <!-- API Key Setting Drawer -->
+  <div id="keyDrawer">
+    <div class="field" style="margin:0 0 10px 0;">
+      <label>APInex API Key (1 Million Free Token)</label>
       <input id="apiKey" type="password" placeholder="sk-apxc23e18..." autocomplete="off">
-      <button class="btn blue" onclick="toggleKey()">देखें</button>
     </div>
-  </div>
-  <div class="actions">
-    <button class="btn primary" onclick="saveSettings()">सेव करें</button>
-  </div>
-</section>
-
-<section class="card">
-  <div class="tabs">
-    <button id="scriptTab" class="tab active" onclick="switchMode('script')">📝 टेक्स्ट / स्क्रिप्ट</button>
-    <button id="imageTab" class="tab" onclick="switchMode('image')">🖼️ इमेज / थंबनेल</button>
+    <button class="btn" style="padding:8px 16px; font-size:12px;" onclick="saveKey()">सेव करें</button>
   </div>
 
-  <div id="scriptMode" class="mode active">
+  <!-- Studio Form -->
+  <div class="card">
+    <div class="card-title">⚡ स्क्रिप्ट सेटअप</div>
+    
     <div class="grid">
       <div class="field">
-        <label>AI मॉडल (100% Free Daily Limit)</label>
-        <select id="scriptModel">
-          <optgroup label="Free Models (दैनिक कोटा)">
-            <option value="free/gemini-3.8-flash" selected>free/gemini-3.8-flash (Recommended)</option>
-            <option value="free/gemini-3.1-pro">free/gemini-3.1-pro</option>
-            <option value="free/gpt-5.6-luna">free/gpt-5.6-luna</option>
-            <option value="free/glm-5.3-flash">free/glm-5.3-flash</option>
-            <option value="free/mimo-v2.6-flash">free/mimo-v2.6-flash</option>
-            <option value="free/nano-banana-2">free/nano-banana-2</option>
-          </optgroup>
-        </select>
-      </div>
-      <div class="field">
-        <label>स्क्रिप्ट प्रकार</label>
-        <select id="scriptType">
-          <option>ब्रेकिंग न्यूज़ (Viral Breaking News)</option>
-          <option>टॉप 10 बड़ी खबरें (Top 10 Headlines)</option>
-          <option>विस्तृत न्यूज़ रिपोर्ट (Deep Analysis)</option>
-          <option>YouTube Shorts / Reels स्क्रिप्ट</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="field" style="margin-top:12px">
-      <label>विषय / हेडलाइंस / इनपुट</label>
-      <textarea id="topic" placeholder="उदाहरण: आज की बड़ी राष्ट्रीय और तकनीकी खबरें लिखें..."></textarea>
-    </div>
-
-    <div class="actions">
-      <button id="scriptBtn" class="btn primary" onclick="generateScript()">⚡ स्क्रिप्ट बनाएं</button>
-      <button class="btn" onclick="copyText('scriptResult')">कॉपी करें</button>
-    </div>
-  </div>
-
-  <div id="imageMode" class="mode">
-    <div class="grid">
-      <div class="field">
-        <label>Image Model</label>
-        <select id="imageModel">
+        <label>AI मॉडल (Free 1M Daily Allowance)</label>
+        <select id="model">
+          <option value="free/gemini-3.8-flash" selected>free/gemini-3.8-flash (Fast & Best)</option>
+          <option value="free/gemini-3.1-pro">free/gemini-3.1-pro</option>
+          <option value="free/gpt-5.6-luna">free/gpt-5.6-luna</option>
+          <option value="free/glm-5.3-flash">free/glm-5.3-flash</option>
+          <option value="free/mimo-v2.6-flash">free/mimo-v2.6-flash</option>
           <option value="free/nano-banana-2">free/nano-banana-2</option>
-          <option value="grok-imagine-2">grok-imagine-2</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>स्क्रिप्ट फॉर्मेट</label>
+        <select id="format">
+          <option value="breaking">🔥 ब्रेकिंग न्यूज़ (Breaking Flash - 1 Min)</option>
+          <option value="youtube" selected>📺 यूट्यूब मुख्य बुलेटिन (3-5 Min Deep)</option>
+          <option value="shorts">📱 रील्स / शॉर्ट्स (Viral 60 Seconds)</option>
+          <option value="top10">🔟 सुपरफास्ट 10 बड़ी खबरें (Bullet Points)</option>
+          <option value="debate">🎙️ न्यूज़ डिबेट / तीखा विश्लेषण</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label>एंकरिंग टोन (Style)</label>
+        <select id="tone">
+          <option value="energetic" selected>⚡ तेज़-तर्रार और आक्रामक (TV News Style)</option>
+          <option value="neutral">🎙️ गंभीर और तथ्य-आधारित (Analytic & Sober)</option>
+          <option value="dramatic">🚨 सस्पेंस और खुलासे वाला (Dramatic Hook)</option>
         </select>
       </div>
       <div class="field">
-        <label>Aspect Ratio</label>
-        <select id="aspect">
-          <option value="16:9" selected>16:9 (YouTube Thumbnail)</option>
-          <option value="1:1">1:1 (Square)</option>
-          <option value="9:16">9:16 (Shorts / Reels)</option>
-        </select>
+        <label>अतिरिक्त निर्देश (Optional)</label>
+        <input id="customInstruction" type="text" placeholder="उदा: साधारण बोलचाल की हिंदी, विजुअल्स शामिल करें">
       </div>
     </div>
 
-    <div class="field" style="margin-top:12px">
-      <label>Image Prompt</label>
-      <textarea id="imagePrompt" placeholder="उदाहरण: Indian Breaking News Studio Background, Realistic 4K..."></textarea>
+    <div class="field">
+      <label>खबर का मुख्य विषय / हेडलाइंस / फैक्ट्स</label>
+      <textarea id="topic" placeholder="यहाँ अपनी खबर का मुख्य मुद्दा लिखें... (उदा: आज भारत और विश्व की 5 सबसे बड़ी हेडलाइंस तैयार करें या बजट पर स्पेशल रिपोर्ट लिखें)"></textarea>
     </div>
 
-    <div class="actions">
-      <button id="imageBtn" class="btn primary" onclick="generateImage()">🎨 इमेज बनाएं</button>
+    <div class="btn-row">
+      <button id="genBtn" class="btn btn-primary" onclick="generateScript()">
+        ✨ प्रो-स्क्रिप्ट जनरेट करें
+      </button>
+      <button class="btn" onclick="clearAll()">नया साफ करें</button>
     </div>
-    <div id="imageError" class="notice hidden" style="margin-top:12px"></div>
-    <img id="imagePreview" alt="Generated Output">
-  </div>
-</section>
 
-<section class="card">
-  <h2>आउटपुट</h2>
-  <div id="scriptResult" class="result">यहाँ परिणाम दिखाई देगा…</div>
-  <div class="stats">
-    <div class="stat"><b id="modelStat">—</b><span>मॉडल</span></div>
-    <div class="stat"><b id="tokenStat">—</b><span>टोकन</span></div>
-    <div class="stat"><b id="timeStat">—</b><span>समय</span></div>
+    <div id="errorBox" class="error-banner"></div>
   </div>
-</section>
-</main>
+
+  <!-- Output Box -->
+  <div class="card">
+    <div class="output-header">
+      <div class="card-title" style="margin:0;">📝 तैयार टेलीप्रॉम्प्टर स्क्रिप्ट</div>
+      <div class="output-meta">
+        <span id="wordCount">0 शब्द</span>
+        <span>•</span>
+        <span id="readTime">~0 मिनट</span>
+      </div>
+    </div>
+
+    <div id="output" class="result-box">यहाँ आपकी प्रोफेशनल एंकर स्क्रिप्ट [विजुअल और वॉइसओवर] के साथ बनकर तैयार होगी...</div>
+
+    <div class="btn-row" style="margin-top:14px;">
+      <button class="btn" style="flex:1" onclick="copyScript()">📋 कॉपी स्क्रिप्ट</button>
+      <button class="btn" style="flex:1" onclick="downloadTxt()">💾 डाउनलोड (.txt)</button>
+    </div>
+  </div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <span>Aryan News Tech Studio</span>
-    <span id="footerUrl">Proxy Ready</span>
-  </div>
-</footer>
-
 <script>
+// आपका क्लाउडफ्लेयर वर्कर URL
+const PROXY = "https://apinex-ai-studio.babu902654.workers.dev/v1/chat/completions";
 const $ = id => document.getElementById(id);
 
 window.addEventListener("DOMContentLoaded", () => {
-  $("apiKey").value = localStorage.getItem("apinex_key") || "";
-  const savedWorker = localStorage.getItem("apinex_worker");
-  if(savedWorker) $("workerUrl").value = savedWorker;
-  updateStatus();
+  const savedKey = localStorage.getItem("apinex_key");
+  if(savedKey){
+    $("apiKey").value = savedKey;
+    updateKeyBadge(true);
+  } else {
+    toggleKeyDrawer(true);
+  }
 });
 
-function updateStatus(){
-  const ok = !!$("apiKey").value.trim();
-  $("apiStatus").textContent = ok ? "API Key सेव है" : "API Key नहीं";
-  $("apiStatus").className = "status " + (ok ? "ok" : "bad");
-  $("footerUrl").textContent = $("workerUrl").value.replace('https://', '');
-}
-$("apiKey").addEventListener("input", updateStatus);
-$("workerUrl").addEventListener("input", updateStatus);
-
-function toggleKey(){
-  $("apiKey").type = $("apiKey").type === "password" ? "text" : "password";
-}
-
-function saveSettings(){
-  const k = $("apiKey").value.trim();
-  const w = $("workerUrl").value.trim().replace(/\/$/, "");
-  if(!k) return alert("कृपया API Key दर्ज करें!");
-  localStorage.setItem("apinex_key", k);
-  localStorage.setItem("apinex_worker", w);
-  updateStatus();
-  alert("सेटिंग्स सेव हो गईं!");
-}
-
-function getBaseUrl(){
-  let url = $("workerUrl").value.trim().replace(/\/$/, "");
-  return url + "/v1";
-}
-
-function getKey(){
-  const k = $("apiKey").value.trim();
-  if(!k) throw new Error("कृपया पहले APInex API Key दर्ज करें!");
-  return k;
-}
-
-function switchMode(mode){
-  $("scriptMode").classList.toggle("active", mode === 'script');
-  $("imageMode").classList.toggle("active", mode === 'image');
-  $("scriptTab").classList.toggle("active", mode === 'script');
-  $("imageTab").classList.toggle("active", mode === 'image');
-}
-
-function setBusy(btn, busy, label){
-  btn.disabled = busy;
-  btn.innerHTML = busy ? '<span class="spinner"></span> प्रोसेस हो रहा है...' : label;
-}
-
-async function apiFetch(path, body){
-  const key = getKey();
-  const endpoint = getBaseUrl() + path;
-
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + key,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(body)
-  });
-
-  const text = await res.text();
-  let data;
-  try { data = JSON.parse(text); } catch { data = { raw: text }; }
-
-  if(!res.ok){
-    const err = data?.error?.message || data?.message || data?.raw || ("HTTP " + res.status);
-    throw new Error(err);
+function toggleKeyDrawer(forceOpen){
+  const drawer = $("keyDrawer");
+  if(forceOpen || drawer.style.display !== "block"){
+    drawer.style.display = "block";
+  } else {
+    drawer.style.display = "none";
   }
-  return data;
+}
+
+function updateKeyBadge(hasKey){
+  const btn = $("keyStatusBtn");
+  const label = $("keyLabel");
+  if(hasKey){
+    btn.classList.add("active");
+    label.innerText = "Key सक्रिय है";
+  } else {
+    btn.classList.remove("active");
+    label.innerText = "API Key दर्ज करें";
+  }
+}
+
+function saveKey(){
+  const k = $("apiKey").value.trim();
+  if(!k) return alert("कृपया Key डालें!");
+  localStorage.setItem("apinex_key", k);
+  updateKeyBadge(true);
+  $("keyDrawer").style.display = "none";
+  alert("API Key सुरक्षित हो गई!");
+}
+
+function clearAll(){
+  $("topic").value = "";
+  $("output").innerText = "यहाँ आपकी प्रोफेशनल एंकर स्क्रिप्ट बनकर तैयार होगी...";
+  $("wordCount").innerText = "0 शब्द";
+  $("readTime").innerText = "~0 मिनट";
+  $("errorBox").style.display = "none";
 }
 
 async function generateScript(){
-  const btn = $("scriptBtn"), topic = $("topic").value.trim();
-  if(!topic) return alert("खबर या टॉपिक लिखें!");
-  
-  setBusy(btn, true, "⚡ स्क्रिप्ट बनाएं");
-  const start = performance.now();
-  $("scriptResult").textContent = "स्क्रिप्ट लिखी जा रही है...";
+  const key = $("apiKey").value.trim();
+  const topic = $("topic").value.trim();
+  const model = $("model").value;
+  const format = $("format").value;
+  const tone = $("tone").value;
+  const custom = $("customInstruction").value.trim();
+
+  if(!key){
+    toggleKeyDrawer(true);
+    return alert("कृपया पहले अपनी APInex API Key दर्ज करें!");
+  }
+  if(!topic) return alert("कृपया खबर का विषय या हेडलाइन दर्ज करें!");
+
+  const btn = $("genBtn");
+  const errBox = $("errorBox");
+  errBox.style.display = "none";
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spinner"></span> AI स्टूडियो स्क्रिप्ट लिख रहा है...`;
+  $("output").innerText = "टेलीप्रॉम्प्टर के लिए स्क्रिप्ट तैयार हो रही है, कृपया 3-5 सेकंड प्रतीक्षा करें...";
+
+  // मास्टर प्रॉम्प्ट (प्रोफेशनल न्यूज़ स्टाइल)
+  const systemPrompt = `आप 'Aryan News Tech' के प्रमुख प्राइम-टाइम न्यूज़ प्रोड्यूसर और एंकर स्क्रिप्ट राइटर हैं।
+नियम:
+1. भाषा: 100% स्वाभाविक, तेज और दमदार हिंदी।
+2. प्रारूप: स्क्रिप्ट में ब्रैकेट में निर्देश दें जैसे: [एंकर ऑन कैमरा], [ग्राफिक्स/विजुअल], [साउंड इफेक्ट/SFX]।
+3. शुरुआत एक धमाकेदार हुक/पंचलाइन से करें ताकि दर्शक वीडियो न छोड़ें।
+4. टोन: ${tone}
+5. प्रारूप शैली: ${format}
+${custom ? "अतिरिक्त निर्देश: " + custom : ""}`;
 
   try {
-    const model = $("scriptModel").value;
-    const type = $("scriptType").value;
-    const system = `आप 'Aryan News Tech' के मुख्य स्क्रिप्ट राइटर हैं। स्क्रिप्ट का प्रकार: ${type}। भाषा: स्पष्ट, आकर्षक और प्रवाहपूर्ण हिंदी।`;
-
-    const data = await apiFetch("/chat/completions", {
-      model: model,
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: topic }
-      ]
+    const response = await fetch(PROXY, {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + key,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: topic }
+        ],
+        temperature: 0.7
+      })
     });
 
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data?.error?.message || data?.message || ("HTTP Error " + response.status));
+    }
+
     const content = data?.choices?.[0]?.message?.content || data?.choices?.[0]?.text;
-    if(!content) throw new Error("मॉडल से कोई रिस्पांस प्राप्त नहीं हुआ।");
+    if(!content) throw new Error("मॉडल से कोई उत्तर प्राप्त नहीं हुआ।");
 
-    $("scriptResult").textContent = content;
-    $("modelStat").textContent = model.replace('free/', '');
-    const u = data?.usage || {};
-    $("tokenStat").textContent = u.total_tokens || "N/A";
-    $("timeStat").textContent = ((performance.now() - start)/1000).toFixed(1) + "s";
-  } catch (e) {
-    $("scriptResult").textContent = "त्रुटि: " + e.message;
-    $("modelStat").textContent = "Error";
+    $("output").innerText = content;
+    calcStats(content);
+
+  } catch (err) {
+    errBox.innerText = "⚠️ त्रुटि: " + err.message;
+    errBox.style.display = "block";
+    $("output").innerText = "स्क्रिप्ट जनरेट नहीं हो सकी। ऊपर दिया गया लाल एरर बॉक्स देखें।";
   } finally {
-    setBusy(btn, false, "⚡ स्क्रिप्ट बनाएं");
+    btn.disabled = false;
+    btn.innerHTML = "✨ प्रो-स्क्रिप्ट जनरेट करें";
   }
 }
 
-async function generateImage(){
-  const btn = $("imageBtn"), prompt = $("imagePrompt").value.trim();
-  if(!prompt) return alert("इमेज के लिए प्रॉम्प्ट लिखें!");
-  
-  setBusy(btn, true, "🎨 इमेज बनाएं");
-  $("imageError").classList.add("hidden");
-  $("imagePreview").style.display = "none";
-
-  try {
-    const model = $("imageModel").value;
-    const body = {
-      model: model,
-      prompt: prompt,
-      aspect_ratio: $("aspect").value
-    };
-
-    const data = await apiFetch("/images/generations", body);
-    const imgUrl = data?.data?.[0]?.url || data?.images?.[0]?.url;
-    
-    if(!imgUrl) throw new Error("इमेज जनरेट नहीं हो सकी या मॉडल सपोर्ट नहीं कर रहा।");
-
-    $("imagePreview").src = imgUrl;
-    $("imagePreview").style.display = "block";
-    $("scriptResult").textContent = "इमेज सफलतापूर्वक तैयार हो गई है। नीचे देखें।";
-    $("modelStat").textContent = model;
-  } catch(e) {
-    $("imageError").textContent = "इमेज त्रुटि: " + e.message;
-    $("imageError").classList.remove("hidden");
-  } finally {
-    setBusy(btn, false, "🎨 इमेज बनाएं");
-  }
+function calcStats(text){
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  $("wordCount").innerText = `${words} शब्द`;
+  // सामान्य न्यूज़ एंकर 1 मिनट में 140 शब्द बोलता है
+  const mins = Math.max(1, Math.round(words / 140));
+  $("readTime").innerText = `~${mins} मिनट का वीडियो`;
 }
 
-function copyText(id){
-  const el = $(id), text = el.value !== undefined ? el.value : el.textContent;
-  navigator.clipboard.writeText(text).then(() => alert("स्क्रिप्ट कॉपी हो गई!")).catch(() => alert("मैन्युअल कॉपी करें।"));
+function copyScript(){
+  const text = $("output").innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert("✅ पूरी स्क्रिप्ट क्लिपबोर्ड में कॉपी हो गई!");
+  });
+}
+
+function downloadTxt(){
+  const text = $("output").innerText;
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `Aryan_News_Script_${Date.now()}.txt`;
+  a.click();
 }
 </script>
 </body>
