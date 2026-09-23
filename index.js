@@ -1,24 +1,23 @@
+// आपकी APInex API Key यहाँ सुरक्षित सेट है
+const APINEX_API_KEY = "sk-apxc23e1858ec4ca2b036573c7eb1df810"; 
+
 export default {
   async fetch(request, env, ctx) {
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+      'Access-Control-Allow-Headers': '*',
     };
 
-    // Pre-flight handling
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: corsHeaders });
     }
 
     const url = new URL(request.url);
 
-    // अगर कोई सीधा Worker URL खोले तो 404 के बजाय स्टेटस दिखेगा
+    // होम स्टेटस चेक
     if (url.pathname === '/' || url.pathname === '') {
-      return new Response(JSON.stringify({ 
-        status: "active", 
-        message: "APInex Proxy Worker is running successfully!" 
-      }), {
+      return new Response(JSON.stringify({ status: "online", system: "Aryan News Tech Proxy" }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
@@ -26,39 +25,30 @@ export default {
     try {
       const targetUrl = 'https://api.apinex.bond' + url.pathname + url.search;
 
-      // 400 Bad Request से बचने के लिए केवल वैध हेडर पास करें (Host हेडर हटाएं)
+      // हेडर क्लीनिंग और ऑथेंटिकेशन
       const cleanHeaders = new Headers();
-      for (const [key, value] of request.headers.entries()) {
-        const lowerKey = key.toLowerCase();
-        if (!['host', 'content-length', 'cf-ray', 'cf-connecting-ip', 'cf-visitor', 'x-real-ip'].includes(lowerKey)) {
-          cleanHeaders.set(key, value);
-        }
-      }
+      cleanHeaders.set('Content-Type', 'application/json');
+      // आपकी API Key वर्कर खुद जोड़ेगा (वेबसाइट पर डालने की ज़रूरत नहीं)
+      cleanHeaders.set('Authorization', `Bearer ${APINEX_API_KEY}`);
 
       const fetchOptions = {
         method: request.method,
         headers: cleanHeaders,
-        redirect: 'follow'
       };
 
-      // केवल POST/PUT रिक्वेस्ट में body भेजें
-      if (request.method !== 'GET' && request.method !== 'HEAD') {
+      if (request.method === 'POST') {
         fetchOptions.body = request.body;
       }
 
       const response = await fetch(targetUrl, fetchOptions);
 
-      // रिस्पांस तैयार करें और CORS हेडर जोड़ें
       const newResponse = new Response(response.body, {
         status: response.status,
         statusText: response.statusText,
         headers: response.headers
       });
 
-      Object.keys(corsHeaders).forEach(key => {
-        newResponse.headers.set(key, corsHeaders[key]);
-      });
-
+      Object.keys(corsHeaders).forEach(k => newResponse.headers.set(k, corsHeaders[k]));
       return newResponse;
 
     } catch (e) {
